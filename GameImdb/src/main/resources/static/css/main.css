@@ -1,0 +1,21 @@
+body {
+    background-color: #FDFEFE;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+footer {
+    margin-top: auto;
+    text-align: center;
+}
+.game-form {
+    padding-bottom: 3rem;
+    width: 40%;
+    background-color:gainsboro;
+    border-radius: 20px;
+}
+.add-game-button{
+text-align:center;
+margin: 20px auto 0;
+}

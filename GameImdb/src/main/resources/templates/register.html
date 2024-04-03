@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="commons/fragments :: head">
+
+</head>
+
+<body>
+
+<div th:replace="commons/fragments :: navbar">
+    Navbar
+</div>
+<div class="container">
+<form class="content col-md-5 mt-5 mx-auto" th:object="${userRegisterBindingModel}" th:action="@{/users/register}" th:method="post">
+    <div>
+        <div class="card input-card p-3 d-flex flex-column">
+            <img src="/images/register.png" height="50" width="50" alt="register picture"/>
+            <h2 class="login mt-3">Registration</h2>
+            <div class="form-group input-field d-flex flex-column mt-3">
+                <label for="firstName" class="text-info font-weight-bold">First Name</label>
+                <input id="firstName" name="firstName"
+                        th:field="*{firstName}"
+                       th:errorclass="is-invalid"
+                       min="2" max="20"
+                       type="text" class="form-control"
+                       placeholder="First name"/>
+                <p class="invalid-feedback errors alert alert-danger">
+                    First name is required and should be between 2 symbols and 20 symbols.
+                </p>
+            </div>
+            <div class="form-group input-field d-flex flex-column mt-3">
+                <label for="lastName" class="text-info font-weight-bold">Last Name</label>
+                <input id="lastName" name="lastName"
+                       th:field="*{lastName}"
+                       th:errorclass="is-invalid"
+                       min="2" max="20"
+                       type="text" class="form-control"
+                       placeholder="Last name"/>
+                <p class="invalid-feedback errors alert alert-danger">
+                    Last name is required and should be between 2 symbols and 20 symbols.
+                </p>
+            </div>
+
+
+            <div class="form-group input-field d-flex flex-column mt-3">
+                <label for="username" class="text-info font-weight-bold">Username</label>
+                <input id="username"
+                        th:field="*{username}"
+                       th:errorclass="is-invalid"
+                       min="5" max="25"
+                       type="text" class="form-control"
+                       placeholder="Username"/>
+                <p class="invalid-feedback errors alert alert-danger">
+                    Username is required and should be between 5 and 25 symbols.
+                </p>
+            </div>
+
+            <div th:if="${usernameNotFree}" class="row">
+                <div class="form-group col-md-12 mb-6">
+                    <p class="errors alert alert-danger">
+                        Username is busy.
+                    </p>
+                </div>
+            </div>
+
+            <div class="form-group input-field d-flex flex-column mt-3">
+                <label for="email" class="text-info font-weight-bold">Email</label>
+                <input id="email"
+                       th:field="*{email}"
+                       th:errorclass="is-invalid"
+                       type="text" class="form-control"
+                       placeholder="Email"/>
+                <p class="invalid-feedback errors alert alert-danger">
+                    Email is required.
+                </p>
+            </div>
+
+
+
+            <div class="form-group input-field d-flex flex-column mt-3">
+                <label for="password" class="text-info font-weight-bold">Password</label>
+                <input id="password"
+                       th:field="*{password}"
+                       th:errorclass="is-invalid"
+                       min="5" max="30"
+                       name="password" type="password" class="form-control"
+                       placeholder="Password"/>
+                <p class="invalid-feedback errors alert alert-danger">
+                    Password is required and should be between 5 and 30 symbols.
+                </p>
+            </div>
+            <div class="form-group input-field d-flex flex-column mt-3">
+                <label for="confirmPassword" class="text-info font-weight-bold">Confirm password</label>
+                <input id="confirmPassword"
+                       th:field="*{confirmPassword}"
+                       th:errorclass="is-invalid"
+                       min="5" max="30"
+                       name="confirmPassword"
+                       type="password" class="form-control"
+                       placeholder="Confirm password"/>
+                <p class="invalid-feedback errors alert alert-danger">
+                    Confirm  Password is required and should be between 5 and 30 symbols.
+                </p>
+            </div>
+            <p th:if="${passwordsDontMatch}" class="errors alert alert-danger">
+                Password and Confirm Password doesn't match.
+            </p>
+            <div class="form-group input-field d-flex flex-column mt-3">
+                <label for="age" class="text-info font-weight-bold">Age</label>
+                <input id="age"
+                       th:field="*{age}"
+                       th:errorclass="is-invalid"
+                       min="10"
+                       name="Age"
+                       type="number"  class="form-control"
+                       placeholder="Age"/>
+                <p class="errors alert alert-danger invalid-feedback ">
+                    Age is required, and you should be 10 or more years old.
+                </p>
+            </div>
+
+
+
+
+            <div class="row justify-content-center">
+                <div class="col col-md-4">
+                    <div class="button-holder d-flex">
+                        <button type="submit"
+                                class="form-button mt-4 btn btn-info d-flex justify-content-center align-items-center">
+                            Register
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="text2 mt-2 d-flex flex-row align-items-center">
+                <span>Already have an account?</span>
+                <a class="register" th:href="@{/users/login}">Login here</a>
+            </div>
+        </div>
+
+    </div>
+</form>
+
+<div>
+    <footer></footer>
+</div>
+
+</body>
+</html>
