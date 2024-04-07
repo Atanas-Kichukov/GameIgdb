@@ -1,8 +1,15 @@
+
 body {
     background-color: #FDFEFE;
     min-height: 100vh;
     display: flex;
     flex-direction: column;
+    text-align:center;
+}
+main{
+margin:auto;
+width: 50%;
+
 }
 
 footer {
@@ -44,6 +51,19 @@ height: 450px;
 border-radius: 1%;
 text-align: center;
 background: gainsboro
+}
+.change-password-button{
+display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.edit-profile-button{
+display: flex;
+    justify-content: center;
+    align-items: center;
+}
+#logout-btn{
+font-weight: bold;
 }
 
 
