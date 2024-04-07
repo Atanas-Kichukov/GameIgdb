@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="commons/fragments :: head"></head>
+
+<body>
+<header th:replace="commons/fragments :: navbar"></header>
+
+<main>
+    <form>
+        <div class="container" th:object="${user}">
+            <div class="row pt-5 pb-2 text-center">
+                <div class="col">
+                    <h1 class="fw-light text-black">Profile</h1>
+                </div>
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-md-6">
+                    <div class="card mb-3 user-info">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <h6 class="mb-0">Username</h6>
+                                </div>
+                                <div class="col-sm-9 text-secondary">
+                                    <h7 class="mb-0" th:text="*{username}">Username</h7>
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <h6 class="mb-0">First name</h6>
+                                </div>
+                                <div class="col-sm-9 text-secondary">
+                                    <h7 class="mb-0" th:text="*{firstName}">First name</h7>
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <h6 class="mb-0">Last name</h6>
+                                </div>
+                                <div class="col-sm-9 text-secondary">
+                                    <h7 class="mb-0" th:text="*{lastName}">Last name</h7>
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <h6 class="mb-0">Email</h6>
+                                </div>
+                                <div class="col-sm-9 text-secondary">
+                                    <h7 class="mb-0" th:text="*{email}">Email</h7>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <h6 class="mb-0">Age</h6>
+                                </div>
+                                <div class="col-sm-9 text-secondary">
+                                    <h7 class="mb-0" th:text="*{age}">Age</h7>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-md-6">
+                    <div class="row justify-content-center">
+                        <div class="col-sm-8 col-md-12 col-lg-4 mx-auto">
+                            <a th:href="@{/users/profile/edit-profile/{username}(username = *{username})}"
+                               class="form-button mt-3 btn btn-info d-flex justify-content-around align-items-center"
+                            >Edit profile</a>
+                        </div>
+                        <div class="col-sm-8 col-md-12 col-lg-4 mx-auto">
+                            <a th:href="@{/users/profile/change-password/{username}(username = *{username})}"
+                               class="form-button mt-3 btn btn-info d-flex justify-content-around align-items-center"
+                            >Change password</a>
+                        </div>
+                        <div class="col-sm-8 col-md-12 col-lg-4 mx-auto">
+                            <a th:href="@{/users/profile/games/{username}(username = *{username})}"
+                               class="form-button mt-3 btn btn-info d-flex justify-content-around align-items-center">User's
+                                games</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</main>
+
+<footer th:replace="commons/fragments :: footer"></footer>
+</body>
+
+</html>

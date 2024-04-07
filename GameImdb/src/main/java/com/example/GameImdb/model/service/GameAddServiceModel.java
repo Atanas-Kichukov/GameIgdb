@@ -1,39 +1,23 @@
-package com.example.GameImdb.model.binding;
+package com.example.GameImdb.model.service;
 
+import com.example.GameImdb.model.entity.UserEntity;
 import com.example.GameImdb.model.entity.enums.GameCategoryEnum;
-import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.PastOrPresent;
-import javax.validation.constraints.Size;
 import java.time.LocalDate;
-
-import java.util.List;
 import java.util.Set;
 
-public class GameAddBindingModel {
+public class GameAddServiceModel {
     private Long id;
-    @Size(min = 5, max = 30)
     private String name;
-    @NotNull
     private Integer ageRestriction;
-    @NotNull
-    private Set<GameCategoryEnum> categories;
     private MultipartFile picture;
-    @NotNull
     private String videoUrl;
-    @Size(min = 10)
-    @NotNull
     private String description;
-    @PastOrPresent
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
-    @NotNull
-    private LocalDate releaseDate;
-    @Size(min = 2)
-    @NotNull
     private String company;
-    @NotNull
+    private LocalDate releaseDate;
+    private Set<GameCategoryEnum> categories;
+    private UserEntity author;
     private Double averageRating;
     private Integer ratingCount;
 
@@ -41,7 +25,7 @@ public class GameAddBindingModel {
         return id;
     }
 
-    public GameAddBindingModel setId(Long id) {
+    public GameAddServiceModel setId(Long id) {
         this.id = id;
         return this;
     }
@@ -50,7 +34,7 @@ public class GameAddBindingModel {
         return name;
     }
 
-    public GameAddBindingModel setName(String name) {
+    public GameAddServiceModel setName(String name) {
         this.name = name;
         return this;
     }
@@ -59,20 +43,25 @@ public class GameAddBindingModel {
         return ageRestriction;
     }
 
-    public GameAddBindingModel setAgeRestriction(Integer ageRestriction) {
+    public GameAddServiceModel setAgeRestriction(Integer ageRestriction) {
         this.ageRestriction = ageRestriction;
         return this;
     }
 
+    public MultipartFile getPicture() {
+        return picture;
+    }
 
-
-
+    public GameAddServiceModel setPicture(MultipartFile picture) {
+        this.picture = picture;
+        return this;
+    }
 
     public String getVideoUrl() {
         return videoUrl;
     }
 
-    public GameAddBindingModel setVideoUrl(String videoUrl) {
+    public GameAddServiceModel setVideoUrl(String videoUrl) {
         this.videoUrl = videoUrl;
         return this;
     }
@@ -81,40 +70,26 @@ public class GameAddBindingModel {
         return description;
     }
 
-    public GameAddBindingModel setDescription(String description) {
+    public GameAddServiceModel setDescription(String description) {
         this.description = description;
         return this;
     }
-
-
 
     public String getCompany() {
         return company;
     }
 
-    public GameAddBindingModel setCompany(String company) {
+    public GameAddServiceModel setCompany(String company) {
         this.company = company;
         return this;
     }
-
-
 
     public LocalDate getReleaseDate() {
         return releaseDate;
     }
 
-    public GameAddBindingModel setReleaseDate(LocalDate releaseDate) {
+    public GameAddServiceModel setReleaseDate(LocalDate releaseDate) {
         this.releaseDate = releaseDate;
-        return this;
-    }
-
-
-    public MultipartFile getPicture() {
-        return picture;
-    }
-
-    public GameAddBindingModel setPicture(MultipartFile picture) {
-        this.picture = picture;
         return this;
     }
 
@@ -122,8 +97,17 @@ public class GameAddBindingModel {
         return categories;
     }
 
-    public GameAddBindingModel setCategories(Set<GameCategoryEnum> categories) {
+    public GameAddServiceModel setCategories(Set<GameCategoryEnum> categories) {
         this.categories = categories;
+        return this;
+    }
+
+    public UserEntity getAuthor() {
+        return author;
+    }
+
+    public GameAddServiceModel setAuthor(UserEntity author) {
+        this.author = author;
         return this;
     }
 
@@ -131,7 +115,7 @@ public class GameAddBindingModel {
         return averageRating;
     }
 
-    public GameAddBindingModel setAverageRating(Double averageRating) {
+    public GameAddServiceModel setAverageRating(Double averageRating) {
         this.averageRating = averageRating;
         return this;
     }
@@ -140,9 +124,8 @@ public class GameAddBindingModel {
         return ratingCount;
     }
 
-    public GameAddBindingModel setRatingCount(Integer ratingCount) {
+    public GameAddServiceModel setRatingCount(Integer ratingCount) {
         this.ratingCount = ratingCount;
         return this;
     }
 }
-

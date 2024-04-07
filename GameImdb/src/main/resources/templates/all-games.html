@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="commons/fragments :: head"></head>
+
+<body>
+<header th:replace="commons/fragments :: navbar"></header>
+
+<main>
+    <section class="py-5 text-center container">
+        <h1 class="fw-light fst-italic text-black">Games</h1>
+    </section>
+    <div class="album py-5 bg-light">
+        <div class="container">
+            <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+
+                <div class="col">
+                    <div class="card shadow-sm">
+                        <img class="bd-placeholder-img card-img-top-wrapper"
+
+                             alt="Game image">
+                        <div class="card-body pb-1">
+                            <h5 class="card-title" >
+                                Game name</h5>
+                        </div>
+                        <div class="card-body">
+                            <p class="card-text" text="sadksjakfadhjkfhadsjkfhndasjkfhadjk">Game description</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div class="btn-group">
+                                    <a type="button" class="btn btn-outline-secondary"  role="button">Read
+                                        more</a>
+                                </div>
+                                <small class="text-muted">Rating</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+</main>
+
+<footer th:replace="commons/fragments :: footer"></footer>
+
+</body>
+
+</html>

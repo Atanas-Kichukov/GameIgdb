@@ -12,7 +12,6 @@ public class GameCategoryEntity extends BaseEntity{
     @Enumerated(EnumType.STRING)
     private GameCategoryEnum categories;
 
-
     public GameCategoryEnum getCategories() {
         return categories;
     }

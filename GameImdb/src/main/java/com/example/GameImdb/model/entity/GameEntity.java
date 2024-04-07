@@ -2,7 +2,6 @@ package com.example.GameImdb.model.entity;
 
 
 import javax.persistence.*;
-import javax.validation.constraints.Positive;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Set;
@@ -16,8 +15,8 @@ public class GameEntity extends BaseEntity {
     private Integer ageRestriction;
     @ManyToMany
     private Set<GameCategoryEntity> categories;
-    @OneToMany
-    private Set<PictureEntity> pictures;
+    @OneToOne
+    private PictureEntity picture;
     @Column(nullable = false)
     private String videoUrl;
     @Column(nullable = false, columnDefinition = "TEXT")
@@ -26,11 +25,12 @@ public class GameEntity extends BaseEntity {
     private LocalDate releaseDate;
     @Column(nullable = false)
     private String company;
-    @Positive
     @Column(nullable = false)
-    private Double rating;
+    private Double averageRating;
+    private Integer ratingCount;
     @ManyToOne
-    private UserEntity publisher;
+    private UserEntity author;
+
     @OneToMany(mappedBy = "game")
     private List<CommentEntity> comments;
 
@@ -70,14 +70,7 @@ public class GameEntity extends BaseEntity {
         return this;
     }
 
-    public Set<PictureEntity> getPictures() {
-        return pictures;
-    }
 
-    public GameEntity setPictures(Set<PictureEntity> pictures) {
-        this.pictures = pictures;
-        return this;
-    }
 
     public String getVideoUrl() {
         return videoUrl;
@@ -107,23 +100,6 @@ public class GameEntity extends BaseEntity {
         return this;
     }
 
-    public UserEntity getPublisher() {
-        return publisher;
-    }
-
-    public GameEntity setPublisher(UserEntity publisher) {
-        this.publisher = publisher;
-        return this;
-    }
-
-    public Double getRating() {
-        return rating;
-    }
-
-    public GameEntity setRating(Double rating) {
-        this.rating = rating;
-        return this;
-    }
 
     public LocalDate getReleaseDate() {
         return releaseDate;
@@ -131,6 +107,43 @@ public class GameEntity extends BaseEntity {
 
     public GameEntity setReleaseDate(LocalDate releaseDate) {
         this.releaseDate = releaseDate;
+        return this;
+    }
+
+
+    public PictureEntity getPicture() {
+        return picture;
+    }
+
+    public GameEntity setPicture(PictureEntity picture) {
+        this.picture = picture;
+        return this;
+    }
+
+    public Double getAverageRating() {
+        return averageRating;
+    }
+
+    public GameEntity setAverageRating(Double averageRating) {
+        this.averageRating = averageRating;
+        return this;
+    }
+
+    public Integer getRatingCount() {
+        return ratingCount;
+    }
+
+    public GameEntity setRatingCount(Integer ratingCount) {
+        this.ratingCount = ratingCount;
+        return this;
+    }
+
+    public UserEntity getAuthor() {
+        return author;
+    }
+
+    public GameEntity setAuthor(UserEntity author) {
+        this.author = author;
         return this;
     }
 }

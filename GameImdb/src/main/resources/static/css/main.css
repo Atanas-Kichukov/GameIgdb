@@ -10,12 +10,40 @@ footer {
     text-align: center;
 }
 .game-form {
-    padding-bottom: 3rem;
-    width: 40%;
-    background-color:gainsboro;
-    border-radius: 20px;
+  width: 40%;
+  background-color:gainsboro;
+  margin: auto;
+  margin-top: 70px;
+  border-radius: 25px;
 }
 .add-game-button{
 text-align:center;
 margin: 20px auto 0;
 }
+#logout-btn{
+border-style: none;
+background-color:#e3f2fd
+}
+.user-info{
+border-radius: 25px
+}
+.form-button{
+text-align:center;
+width: 130px;
+}
+.about-container {
+width: 450px;
+height: 400px;
+margin-top: 25px;
+font-size: 5px;
+}
+.about-circle {
+margin-top: 70px;
+width: 1050px;
+height: 450px;
+border-radius: 1%;
+text-align: center;
+background: gainsboro
+}
+
+

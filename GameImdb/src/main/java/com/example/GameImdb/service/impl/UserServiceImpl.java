@@ -3,10 +3,13 @@ package com.example.GameImdb.service.impl;
 import com.example.GameImdb.model.entity.UserEntity;
 import com.example.GameImdb.model.entity.UserRoleEntity;
 import com.example.GameImdb.model.entity.enums.UserRoleEnum;
+import com.example.GameImdb.model.service.UserChangePasswordServiceModel;
+import com.example.GameImdb.model.service.UserEditProfileServiceModel;
 import com.example.GameImdb.model.service.UserServiceModel;
 import com.example.GameImdb.repository.UserRepository;
 import com.example.GameImdb.repository.UserRoleRepository;
 import com.example.GameImdb.service.UserService;
+import com.example.GameImdb.service.exception.ObjectNotFoundException;
 import org.modelmapper.ModelMapper;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -60,8 +63,44 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public boolean isUsernameFree(String username) {
+public boolean isUsernameFree(String username) {
         return userRepository.findByUsernameIgnoreCase(username).isEmpty();
+    }
+
+    @Override
+    public UserEntity findByUsername(String username) {
+        return userRepository.findByUsername(username)
+                .orElseThrow(() -> new ObjectNotFoundException("User with username " + username + " not found!"));
+    }
+
+    @Override
+    public boolean isCurrentUser(String currentUserUsername, String username) {
+        return currentUserUsername.equals(username);
+    }
+
+    @Override
+    public boolean isCurrentPasswordValid(String password, String username) {
+        UserEntity user = findByUsername(username);
+
+        return passwordEncoder.matches(password, user.getPassword());
+    }
+
+    @Override
+    public void userChangePasswordServiceModel(UserChangePasswordServiceModel userChangePasswordServiceModel, String username) {
+        UserEntity user = findByUsername(username);
+        user.setPassword(passwordEncoder.encode(userChangePasswordServiceModel.getNewPassword()));
+
+        userRepository.save(user);
+    }
+
+    @Override
+    public void editProfile(UserEditProfileServiceModel userEditProfileServiceModel, String username) {
+        UserEntity user = findByUsername(username);
+        user.setLastName(userEditProfileServiceModel.getLastName())
+                .setEmail(userEditProfileServiceModel.getEmail())
+                .setAge(userEditProfileServiceModel.getAge());
+
+        userRepository.save(user);
     }
 
 }

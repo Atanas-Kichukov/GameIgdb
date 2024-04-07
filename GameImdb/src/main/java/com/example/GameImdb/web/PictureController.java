@@ -6,6 +6,7 @@ import com.example.GameImdb.model.view.PictureViewModel;
 import com.example.GameImdb.repository.PictureRepository;
 import com.example.GameImdb.service.CloudinaryService;
 
+import com.example.GameImdb.service.PictureService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -20,11 +21,13 @@ import java.util.stream.Collectors;
 public class PictureController {
     private final CloudinaryService cloudinaryService;
     private final PictureRepository pictureRepository;
+    private final PictureService pictureService;
 
     //TODO delete the repo and initialise the methods there and in the service
-    public PictureController(CloudinaryService cloudinaryService, PictureRepository pictureRepository) {
+    public PictureController(CloudinaryService cloudinaryService, PictureRepository pictureRepository, PictureService pictureService) {
         this.cloudinaryService = cloudinaryService;
         this.pictureRepository = pictureRepository;
+        this.pictureService = pictureService;
     }
 
     @GetMapping("/pictures/add")
@@ -36,15 +39,11 @@ public class PictureController {
 
     @PostMapping("/pictures/add")
     public String addPicture(PictureBindingModel pictureBindingModel) throws IOException {
-        PictureEntity pictureEntity = createPictureEntity(pictureBindingModel.getPicture());
+        PictureEntity pictureEntity = pictureService.createPictureEntity(pictureBindingModel.getPicture());
         pictureRepository.save(pictureEntity);
         return "redirect:/pictures/all";
     }
 
-    private PictureEntity createPictureEntity(MultipartFile file) throws IOException {
-        PictureEntity uploaded = cloudinaryService.upload(file);
-        return new PictureEntity().setPublicId(uploaded.getPublicId()).setUrl(uploaded.getUrl());
-    }
 
     @GetMapping("/pictures/all")
     public String all(Model model) {

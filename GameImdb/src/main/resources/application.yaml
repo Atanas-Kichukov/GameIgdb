@@ -25,6 +25,7 @@ spring:
     hiddenmethod:
       filter:
         enabled: true
+
 logging:
   level:
     org.hibernate.SQL: DEBUG
