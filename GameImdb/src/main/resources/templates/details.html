@@ -7,42 +7,112 @@
 <body>
 <header th:replace="commons/fragments :: navbar"></header>
 
-<main class="mx-auto">
-    <div class="container pt-5">
-        <h1 class="text-center fw-light fst-italic text-info">About</h1>
+<main>
 
-        <div class="about-circle about-container">
-            <h5 class="circle-text">
-                Welcome to IgDb(Internet Game Database), the ultimate destination for gamers and enthusiasts alike! Just as IMDb is the go-to platform for movie lovers, our website is dedicated to all things gaming.
-            </h5>
-
-            <h5 class="circle-text">
-                Whether you're a casual player, a hardcore gamer, or simply someone intrigued by the world of gaming, we've got you covered. Our platform serves as a comprehensive hub where you can discover, explore, and engage with a vast array of games across different genres, platforms, and eras.
-            </h5>
-            <br>
-            <br>
-            <h5 class="circle-text">
-                At IgDb yo can:
-            </h5>
-            <br>
-            <br>
-            <h5 class="circle-text">
-                &#x2022;Dive into our extensive database featuring a diverse collection of games, ranging from classic titles to the latest releases. Whether you're into action, adventure, strategy, role-playing, or simulation, there's something here for everyone.
-            </h5>
-            <br>
-            <br>
-            <h5 class="circle-text">
-                &#x2022;Join a community of fellow Gamers who share your passion and participate in discussions.
-            </h5>
-            <br>
-            <br>
-            <h5 class="circle-text">
-                IgDb is more than just a website; it's a celebration of gaming culture and a haven for gamers of all backgrounds and preferences.
-                So, whether you're embarking on a quest for epic adventures or seeking the thrill of competitive gaming, join us on this exhilarating
-                journey through the vast universe of gaming!
-            </h5>
+    <section class="py-4 text-center container">
+        <div class="d-flex align-items-center justify-content-center">
+            <img src="/images/details.png" width="40" height="40">
+        <h1 class="fw-light fst-italic text-info">Game details</h1>
         </div>
+    </section>
+
+
+    <div class="container center details-info text-info" th:object="${gameWithDetails}">
+        <h3 class="py-3 fw-normal" id="recipe-title" th:text="*{name}">Game title</h3>
+        <span>Added by
+            <a class="username" th:text="*{author}">Username</a>
+        </span>
+        <div class="game">
+            <section id="img-section">
+                <img class="details-img"
+
+                     alt="Game image">
+            </section>
+
+            <section id="info-section">
+                <p class="bold-info">Age Restriction:
+                    <span class="not-bold-info" th:text="*{ageRestriction}"></span>
+                </p>
+                <p class="bold-info">Rating:
+                    <span class="not-bold-info" th:text="*{averageRating}"></span>
+                </p>
+            </section>
+
+        </div>
+
+        <hr>
+        <section class="section-margin">
+            <h4 class="fw-normal"><u>Description:</u></h4>
+            <p th:text="*{description}">Description</p>
+        </section>
+        <hr>
+        <div>
+            <section id="video" class="video">
+                <iframe id="frame" th:src="'https://www.youtube.com/embed/' + *{videoUrl}" >
+                </iframe>
+            </section>
+        </div>
+
+        <div class="details-buttons" th:if="*{isOwner()}">
+            <div class="col-sm-8 col-md-12 col-lg-2 mx-2">
+                <a th:href="@{/game/edit/{id}(id = *{id})}"
+                   class="form-button mt-3 btn btn-info d-flex justify-content-center align-items-center">
+                    Edit game</a>
+            </div>
+            <div class="col-sm-8 col-md-12 col-lg-2 mx-2">
+                <form th:action="@{/game/delete/{id}(id = *{id})}" th:method="delete">
+                    <button type="submit"
+                            class="form-button mt-3 btn btn-info d-flex justify-content-center align-items-center">
+                        Delete game
+                    </button>
+
+                </form>
+            </div>
+        </div>
+        <hr>
+
+        <section class="comments section-margin">
+            <h4 class="fw-normal">Comments</h4>
+
+            <!-- All comments section -->
+            <div>
+                    <span id="commentCntr">
+                        <!-- Comments section, filled in by script -->
+                    </span>
+            </div>
+
+            <div>
+                <!-- Comments submission -->
+                <form id="commentForm" th:method="post">
+                    <div class="form-group">
+                        <h5 class="fw-normal">Leave a comment</h5>
+                        <label for="message">Message</label>
+                        <textarea name="message" id="message" cols="30" rows="5" class="form-control"
+                                  style="background-color: white;" required minlength="5"></textarea>
+                        <small id="messageError" class="invalid-feedback errors alert alert-danger">
+                            Message should be at least 5 characters.
+                        </small>
+                    </div>
+
+                    <div class="details-buttons"  >
+                        <button type="submit"
+                                class="form-button btn btn-info d-flex justify-content-center align-items-center mt-2"
+                                id="postComment">Add comment
+                        </button>
+                    </div>
+
+                </form>
+                <!-- Comments submission -->
+            </div>
+
+        </section>
+
     </div>
+
+    <input type="hidden" name="recipeId" id="recipeId">
+
+    <script th:src="@{/js/comments.js}"></script>
+
 </main>
 
 <footer th:replace="commons/fragments :: footer"></footer>

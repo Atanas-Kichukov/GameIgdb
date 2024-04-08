@@ -4,16 +4,22 @@ import com.example.GameImdb.model.entity.GameEntity;
 import com.example.GameImdb.model.entity.PictureEntity;
 import com.example.GameImdb.model.entity.UserEntity;
 import com.example.GameImdb.model.service.GameAddServiceModel;
+import com.example.GameImdb.model.view.GameDetailsViewModel;
+import com.example.GameImdb.model.view.GameEditViewModel;
+import com.example.GameImdb.model.view.GameViewModel;
 import com.example.GameImdb.repository.GameRepository;
 import com.example.GameImdb.service.GameCategoryService;
 import com.example.GameImdb.service.GameService;
 import com.example.GameImdb.service.PictureService;
 import com.example.GameImdb.service.UserService;
+import com.example.GameImdb.service.exception.ObjectNotFoundException;
 import org.modelmapper.ModelMapper;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
+import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -49,5 +55,41 @@ public class GameServiceImpl implements GameService {
                         .collect(Collectors.toSet()));
 
         gameRepository.save(newGame);
+    }
+
+    @Override
+    public List<GameViewModel> getAllGames() {
+        return gameRepository.findAll()
+                .stream()
+                .map(gameEntity -> modelMapper.map(gameEntity, GameViewModel.class))
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public GameDetailsViewModel getGameDetailsViewById(Long id, String name) {
+        GameEntity gameEntity = findById(id);
+        GameDetailsViewModel gameDetailsViewModel = modelMapper.map(gameEntity, GameDetailsViewModel.class);
+        gameDetailsViewModel.setAuthor(gameEntity.getAuthor().getUsername());
+        gameDetailsViewModel.setOwner(isOwner(id,name));
+        return gameDetailsViewModel;
+    }
+
+    @Override
+    public GameEntity findById(Long id) {
+        return gameRepository.findById(id).orElseThrow(() ->new ObjectNotFoundException("Game with id" + id + "is not in the Data Base"));
+    }
+
+    @Override
+    public boolean isOwner(Long id, String username) {
+        GameEntity gameEntity = findById(id);
+        UserEntity user = userService.findByUsername(username);
+
+        return user.getUsername().equals(gameEntity.getAuthor().getUsername());
+    }
+
+    @Override
+    public GameEditViewModel getEditViewModel(Long id) {
+        GameEntity game = findById(id);
+        return modelMapper.map(game, GameEditViewModel.class);
     }
 }

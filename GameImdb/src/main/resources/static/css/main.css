@@ -66,4 +66,26 @@ display: flex;
 font-weight: bold;
 }
 
+.game {
+    display: flex;
+    justify-content: space-between;
+}
+#video {
+    width: 100%;
+    max-width: 800px;
+    margin: auto;
+}
+
+#video iframe {
+    width: 100%;
+    height: 500px;
+}
+.details-buttons{
+display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+
 

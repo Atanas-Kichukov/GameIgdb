@@ -6,6 +6,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.PastOrPresent;
+import javax.validation.constraints.Positive;
 import javax.validation.constraints.Size;
 import java.time.LocalDate;
 
@@ -17,6 +18,7 @@ public class GameAddBindingModel {
     @Size(min = 5, max = 30)
     private String name;
     @NotNull
+    @Positive
     private Integer ageRestriction;
     @NotNull
     private Set<GameCategoryEnum> categories;

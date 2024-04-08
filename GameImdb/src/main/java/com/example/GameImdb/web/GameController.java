@@ -1,20 +1,24 @@
 package com.example.GameImdb.web;
 
 import com.example.GameImdb.model.binding.GameAddBindingModel;
+import com.example.GameImdb.model.binding.GameEditBindingModel;
 import com.example.GameImdb.model.service.GameAddServiceModel;
+import com.example.GameImdb.model.view.GameDetailsViewModel;
+import com.example.GameImdb.model.view.GameEditViewModel;
+import com.example.GameImdb.model.view.GameViewModel;
 import com.example.GameImdb.service.GameService;
 import org.modelmapper.ModelMapper;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
 import java.io.IOException;
 import java.security.Principal;
+import java.util.List;
 
 @Controller
 @RequestMapping("/game")
@@ -48,9 +52,32 @@ public class GameController {
     }
 
     @GetMapping("/all")
-    public String allGames(){
+    public String allGames(Model model){
+        List<GameViewModel> allGames = gameService.getAllGames();
+        model.addAttribute("allGames", allGames);
+
         return "all-games";
     }
+
+    @GetMapping("/details/{id}")
+    public String gameDetails(@PathVariable Long id,Model model, Principal principal){
+
+        GameDetailsViewModel gameDetailsViewModel = gameService.getGameDetailsViewById(id,principal.getName());
+        model.addAttribute("gameWithDetails",gameDetailsViewModel);
+
+    return "details";
+    }
+
+    @PreAuthorize("gameServiceImpl.isOwner(#id,#principal.name)")
+    @GetMapping("/edit/{id}")
+    public String editGameView(@PathVariable Long id, Model model, Principal principal){
+
+        GameEditViewModel gameEditViewModel = gameService.getEditViewModel(id);
+        GameEditBindingModel gameEditBindingModel = modelMapper.map(gameEditViewModel, GameEditBindingModel.class);
+        model.addAttribute("gameEditBindingModel",gameEditBindingModel);
+        return "game-edit";
+    }
+
     @ModelAttribute
     public GameAddBindingModel gameAddBindingModel(){
         return new GameAddBindingModel();
