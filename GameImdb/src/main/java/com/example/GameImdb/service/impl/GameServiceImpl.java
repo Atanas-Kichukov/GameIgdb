@@ -4,6 +4,7 @@ import com.example.GameImdb.model.entity.GameEntity;
 import com.example.GameImdb.model.entity.PictureEntity;
 import com.example.GameImdb.model.entity.UserEntity;
 import com.example.GameImdb.model.service.GameAddServiceModel;
+import com.example.GameImdb.model.service.GameEditServiceModel;
 import com.example.GameImdb.model.view.GameDetailsViewModel;
 import com.example.GameImdb.model.view.GameEditViewModel;
 import com.example.GameImdb.model.view.GameViewModel;
@@ -17,6 +18,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
@@ -52,11 +54,12 @@ public class GameServiceImpl implements GameService {
                         .getCategories()
                         .stream()
                         .map(gameCategoryService::findCategoryByName)
-                        .collect(Collectors.toSet()));
+                        .collect(Collectors.toList()));
 
         gameRepository.save(newGame);
     }
 
+    @Transactional
     @Override
     public List<GameViewModel> getAllGames() {
         return gameRepository.findAll()
@@ -76,7 +79,7 @@ public class GameServiceImpl implements GameService {
 
     @Override
     public GameEntity findById(Long id) {
-        return gameRepository.findById(id).orElseThrow(() ->new ObjectNotFoundException("Game with id" + id + "is not in the Data Base"));
+        return gameRepository.findById(id).orElseThrow(() ->new ObjectNotFoundException("Game with id" + id + "is not found"));
     }
 
     @Override
@@ -91,5 +94,17 @@ public class GameServiceImpl implements GameService {
     public GameEditViewModel getEditViewModel(Long id) {
         GameEntity game = findById(id);
         return modelMapper.map(game, GameEditViewModel.class);
+    }
+
+    @Override
+    public void editGame(GameEditServiceModel gameEditServiceModel) {
+        GameEntity game = findById(gameEditServiceModel.getId());
+
+        game.setVideoUrl(gameEditServiceModel.getVideoUrl())
+                .setAgeRestriction(gameEditServiceModel.getAgeRestriction())
+                .setDescription(gameEditServiceModel.getDescription());
+
+        gameRepository.save(game);
+
     }
 }

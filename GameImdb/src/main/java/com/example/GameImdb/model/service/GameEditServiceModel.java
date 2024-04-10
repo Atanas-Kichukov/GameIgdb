@@ -1,26 +1,16 @@
-package com.example.GameImdb.model.binding;
+package com.example.GameImdb.model.service;
 
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Positive;
-import javax.validation.constraints.Size;
-
-public class GameEditBindingModel {
+public class GameEditServiceModel {
     private Long id;
-    @NotBlank
     private String videoUrl;
-    @NotBlank
-    @Positive
     private Integer ageRestriction;
-    @Size(min = 10)
-    @NotBlank
     private String description;
 
     public Long getId() {
         return id;
     }
 
-    public GameEditBindingModel setId(Long id) {
+    public GameEditServiceModel setId(Long id) {
         this.id = id;
         return this;
     }
@@ -29,7 +19,7 @@ public class GameEditBindingModel {
         return videoUrl;
     }
 
-    public GameEditBindingModel setVideoUrl(String videoUrl) {
+    public GameEditServiceModel setVideoUrl(String videoUrl) {
         this.videoUrl = videoUrl;
         return this;
     }
@@ -38,7 +28,7 @@ public class GameEditBindingModel {
         return ageRestriction;
     }
 
-    public GameEditBindingModel setAgeRestriction(Integer ageRestriction) {
+    public GameEditServiceModel setAgeRestriction(Integer ageRestriction) {
         this.ageRestriction = ageRestriction;
         return this;
     }
@@ -47,7 +37,7 @@ public class GameEditBindingModel {
         return description;
     }
 
-    public GameEditBindingModel setDescription(String description) {
+    public GameEditServiceModel setDescription(String description) {
         this.description = description;
         return this;
     }

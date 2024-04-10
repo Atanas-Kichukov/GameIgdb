@@ -3,6 +3,7 @@ package com.example.GameImdb.web;
 import com.example.GameImdb.model.binding.GameAddBindingModel;
 import com.example.GameImdb.model.binding.GameEditBindingModel;
 import com.example.GameImdb.model.service.GameAddServiceModel;
+import com.example.GameImdb.model.service.GameEditServiceModel;
 import com.example.GameImdb.model.view.GameDetailsViewModel;
 import com.example.GameImdb.model.view.GameEditViewModel;
 import com.example.GameImdb.model.view.GameViewModel;
@@ -77,9 +78,27 @@ public class GameController {
         model.addAttribute("gameEditBindingModel",gameEditBindingModel);
         return "game-edit";
     }
+    @PreAuthorize("gameServiceImpl.isOwner(#id,#principal.name)")
+    @PatchMapping("/edit/{id}")
+    public String editGameConfirm(@PathVariable Long id,
+                                  @Valid GameEditBindingModel gameEditBindingModel,
+                                  BindingResult bindingResult,
+                                  RedirectAttributes redirectAttributes,
+                                  Principal principal){
+
+        if(bindingResult.hasErrors()){
+            redirectAttributes.addFlashAttribute("gameEditBindingModel",gameEditBindingModel);
+            redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.gameEditBindingModel", bindingResult);
+            return "redirect:/game/edit/" + id ;
+        }
+        GameEditServiceModel gameEditServiceModel = modelMapper.map(gameEditBindingModel, GameEditServiceModel.class);
+        gameService.editGame(gameEditServiceModel);
+        return "redirect:/game/details/" + id ;
+    }
 
     @ModelAttribute
     public GameAddBindingModel gameAddBindingModel(){
         return new GameAddBindingModel();
     }
+
 }

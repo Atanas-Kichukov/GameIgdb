@@ -13,8 +13,8 @@ public class GameEntity extends BaseEntity {
     private String name;
     @Column(nullable = false)
     private Integer ageRestriction;
-    @ManyToMany
-    private Set<GameCategoryEntity> categories;
+    @ManyToMany(fetch = FetchType.LAZY)
+    private List<GameCategoryEntity> categories;
     @OneToOne
     private PictureEntity picture;
     @Column(nullable = false)
@@ -31,7 +31,7 @@ public class GameEntity extends BaseEntity {
     @ManyToOne
     private UserEntity author;
 
-    @OneToMany(mappedBy = "game")
+    @OneToMany(mappedBy = "game",fetch = FetchType.LAZY)
     private List<CommentEntity> comments;
 
     public List<CommentEntity> getComments() {
@@ -61,11 +61,11 @@ public class GameEntity extends BaseEntity {
         return this;
     }
 
-    public Set<GameCategoryEntity> getCategories() {
+    public List<GameCategoryEntity> getCategories() {
         return categories;
     }
 
-    public GameEntity setCategories(Set<GameCategoryEntity> categories) {
+    public GameEntity setCategories(List<GameCategoryEntity> categories) {
         this.categories = categories;
         return this;
     }

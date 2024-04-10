@@ -18,7 +18,7 @@
 
 
     <div class="container center details-info text-info" th:object="${gameWithDetails}">
-        <h3 class="py-3 fw-normal" id="recipe-title" th:text="*{name}">Game title</h3>
+        <h3 class="py-3 fw-normal" id="game-title" th:text="*{name}">Game title</h3>
         <span>Added by
             <a class="username" th:text="*{author}">Username</a>
         </span>
@@ -109,7 +109,7 @@
 
     </div>
 
-    <input type="hidden" name="recipeId" id="recipeId">
+    <input type="hidden" name="gameId" id="gameId" th:value="${gameWithDetails.id}">
 
     <script th:src="@{/js/comments.js}"></script>
 
