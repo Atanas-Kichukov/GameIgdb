@@ -2,11 +2,14 @@ package com.example.GameImdb.service.impl;
 
 import com.example.GameImdb.model.entity.CommentEntity;
 import com.example.GameImdb.model.entity.GameEntity;
+import com.example.GameImdb.model.entity.UserEntity;
 import com.example.GameImdb.model.service.CommentServiceModel;
 import com.example.GameImdb.model.view.CommentViewModel;
+import com.example.GameImdb.repository.CommentRepository;
 import com.example.GameImdb.repository.GameRepository;
 import com.example.GameImdb.service.CommentService;
 import com.example.GameImdb.service.GameService;
+import com.example.GameImdb.service.UserService;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -17,11 +20,15 @@ import java.util.stream.Collectors;
 @Service
 public class CommentServiceImpl implements CommentService {
 
-    private final GameRepository gameRepository;
+
+    private final CommentRepository commentRepository;
+    private final UserService userService;
     private final GameService gameService;
 
-    public CommentServiceImpl(GameRepository gameRepository, GameService gameService) {
-        this.gameRepository = gameRepository;
+    public CommentServiceImpl(CommentRepository commentRepository, UserService userService, GameService gameService) {
+
+        this.commentRepository = commentRepository;
+        this.userService = userService;
         this.gameService = gameService;
     }
 
@@ -38,8 +45,19 @@ public class CommentServiceImpl implements CommentService {
 
     @Override
     public CommentViewModel createComment(CommentServiceModel commentServiceModel) {
-     //TODO
-        return null;
+
+        UserEntity author = userService.findByUsername(commentServiceModel.getAuthor());
+
+        GameEntity game = gameService.findById(commentServiceModel.getGameId());
+
+        CommentEntity comment = new CommentEntity()
+                .setAuthor(author)
+                .setGame(game)
+                .setMessage(commentServiceModel.getMessage())
+                .setCreated(LocalDateTime.now());
+
+        CommentEntity savedComment = commentRepository.save(comment);
+        return mapAsComment(savedComment, commentServiceModel.getAuthor());
     }
 
     private CommentViewModel mapAsComment(CommentEntity commentEntity, String username) {
@@ -48,9 +66,9 @@ public class CommentServiceImpl implements CommentService {
         commentViewModel
                 .setCommentId(commentEntity.getId())
                 .setCanDelete(commentEntity.getAuthor().getUsername().equals(username))
-                .setCreated(LocalDateTime.now())
+                .setCreated(commentEntity.getCreated())
                 .setMessage(commentEntity.getMessage())
-                .setUser(commentEntity.getAuthor().getUsername());
+                .setAuthor(commentEntity.getAuthor().getUsername());
 
         return commentViewModel;
 

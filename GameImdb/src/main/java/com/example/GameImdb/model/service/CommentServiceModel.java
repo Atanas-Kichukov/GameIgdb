@@ -3,7 +3,16 @@ package com.example.GameImdb.model.service;
 public class CommentServiceModel {
     private Long gameId;
     private String message;
-    private String creator;
+    private String author;
+
+    public String getAuthor() {
+        return author;
+    }
+
+    public CommentServiceModel setAuthor(String author) {
+        this.author = author;
+        return this;
+    }
 
     public Long getGameId() {
         return gameId;
@@ -23,12 +32,5 @@ public class CommentServiceModel {
         return this;
     }
 
-    public String getCreator() {
-        return creator;
-    }
 
-    public CommentServiceModel setCreator(String creator) {
-        this.creator = creator;
-        return this;
-    }
 }

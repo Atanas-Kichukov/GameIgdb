@@ -85,7 +85,27 @@ display: flex;
     justify-content: center;
     align-items: center;
 }
+.comments {
+        width: 100%;
+        padding-bottom: 20px;
+    }
+    .comments {
+        width: 100%;
+        margin-bottom: 1%;
+    }
 
+.user-comment {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        margin-top: 30px;
+        margin-bottom: 30px;
+        word-break: break-all;
+        border: 2px solid #58ACFA;
+        border-radius: 5px;
+        padding-left: 20px;
+        padding-right: 20px;
+    }
 
 
 

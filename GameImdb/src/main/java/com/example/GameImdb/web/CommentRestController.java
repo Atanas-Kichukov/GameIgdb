@@ -8,8 +8,6 @@ import com.example.GameImdb.service.CommentService;
 import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
 
@@ -36,12 +34,13 @@ public class CommentRestController {
     }
 
     @PostMapping("/api/{gameId}/comments")
-    public ResponseEntity<CommentViewModel> newComment(@AuthenticationPrincipal UserDetails principal,
-                                                       @PathVariable Long gameId,
+    public ResponseEntity<CommentViewModel> newComment(@PathVariable Long gameId,
+                                                       Principal principal,
                                                        @RequestBody @Valid CommentAddBindingModel commentAddBindingModel){
 
         CommentServiceModel commentServiceModel = modelMapper.map(commentAddBindingModel, CommentServiceModel.class);
-        commentServiceModel.setGameId(gameId);
+        commentServiceModel.setGameId(gameId)
+                .setAuthor(principal.getName());
         CommentViewModel commentViewModel = commentService.createComment(commentServiceModel);
 
         URI locationOfNewComment = URI.create(String.format("/api/%s/comments/%s",gameId,commentViewModel.getCommentId()));

@@ -2,13 +2,26 @@ package com.example.GameImdb.model.view;
 
 import java.time.Instant;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class CommentViewModel {
     private Long commentId;
     private String message;
-    private String user;
-    private LocalDateTime created;
+    private String author;
+    private String created;
     private boolean canDelete;
+
+
+    public String getAuthor() {
+        return author;
+    }
+
+    public CommentViewModel setAuthor(String author) {
+        this.author = author;
+        return this;
+    }
+
+
 
     public Long getCommentId() {
         return commentId;
@@ -28,30 +41,21 @@ public class CommentViewModel {
         return this;
     }
 
-    public String getUser() {
-        return user;
-    }
-
-    public CommentViewModel setUser(String user) {
-        this.user = user;
-        return this;
-    }
-
-    public LocalDateTime getCreated() {
-        return created;
-    }
-
-    public CommentViewModel setCreated(LocalDateTime created) {
-        this.created = created;
-        return this;
-    }
-
     public boolean isCanDelete() {
         return canDelete;
     }
 
     public CommentViewModel setCanDelete(boolean canDelete) {
         this.canDelete = canDelete;
+        return this;
+    }
+
+    public String getCreated() {
+        return created;
+    }
+
+    public CommentViewModel setCreated(LocalDateTime created) {
+        this.created = DateTimeFormatter.ofPattern("HH:mm dd-MM-yyyy").format(created);
         return this;
     }
 }

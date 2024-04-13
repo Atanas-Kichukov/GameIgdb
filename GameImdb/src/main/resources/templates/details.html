@@ -83,7 +83,8 @@
 
             <div>
                 <!-- Comments submission -->
-                <form id="commentForm" th:method="post">
+                <form id="commentForm" th:method="post"
+                      th:action="@{/api/{gameId}/comments(gameId = ${gameWithDetails.id})}">
                     <div class="form-group">
                         <h5 class="fw-normal">Leave a comment</h5>
                         <label for="message">Message</label>
