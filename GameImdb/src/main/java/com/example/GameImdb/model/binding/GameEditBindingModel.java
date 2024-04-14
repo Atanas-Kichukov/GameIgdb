@@ -9,7 +9,7 @@ public class GameEditBindingModel {
     private Long id;
     @NotBlank
     private String videoUrl;
-    @NotBlank
+    @NotNull
     @Positive
     private Integer ageRestriction;
     @Size(min = 10)

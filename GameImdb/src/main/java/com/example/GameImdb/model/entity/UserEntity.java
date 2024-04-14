@@ -23,6 +23,8 @@ public class UserEntity extends BaseEntity{
     private Integer age;
     @ManyToMany(fetch = FetchType.EAGER)
     private Set<UserRoleEntity> roles;
+    @OneToMany(mappedBy = "author",fetch = FetchType.EAGER)
+    private Set<GameEntity> games;
 
     public String getUsername() {
         return username;
@@ -84,6 +86,15 @@ public class UserEntity extends BaseEntity{
 
     public UserEntity setAge(Integer age) {
         this.age = age;
+        return this;
+    }
+
+    public Set<GameEntity> getGames() {
+        return games;
+    }
+
+    public UserEntity setGames(Set<GameEntity> games) {
+        this.games = games;
         return this;
     }
 }

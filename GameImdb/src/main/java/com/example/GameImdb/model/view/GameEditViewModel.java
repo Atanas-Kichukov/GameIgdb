@@ -1,7 +1,7 @@
 package com.example.GameImdb.model.view;
 
 public class GameEditViewModel {
-
+    private Long id;
     private String videoUrl;
     private Integer ageRestriction;
     private String description;
@@ -31,6 +31,15 @@ public class GameEditViewModel {
 
     public GameEditViewModel setDescription(String description) {
         this.description = description;
+        return this;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public GameEditViewModel setId(Long id) {
+        this.id = id;
         return this;
     }
 }

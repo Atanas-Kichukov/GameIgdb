@@ -45,11 +45,11 @@ public class GameController {
         if(bindingResult.hasErrors()){
             redirectAttributes.addFlashAttribute("gameAddBindingModel",gameAddBindingModel);
             redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.gameAddBindingModel", bindingResult);
-            return "redirect:add";
+            return "redirect:/game/add";
         }
         GameAddServiceModel gameAddServiceModel = modelMapper.map(gameAddBindingModel, GameAddServiceModel.class);
         gameService.addNewGame(gameAddServiceModel, principal.getName());
-        return "redirect: /";
+        return "redirect:/game/all";
     }
 
     @GetMapping("/all")
@@ -89,12 +89,22 @@ public class GameController {
         if(bindingResult.hasErrors()){
             redirectAttributes.addFlashAttribute("gameEditBindingModel",gameEditBindingModel);
             redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.gameEditBindingModel", bindingResult);
-            return "redirect:/game/edit/" + id ;
+            return "redirect:/game/edit/errors/" + id ;
         }
         GameEditServiceModel gameEditServiceModel = modelMapper.map(gameEditBindingModel, GameEditServiceModel.class);
         gameService.editGame(gameEditServiceModel);
         return "redirect:/game/details/" + id ;
     }
+
+
+    @PreAuthorize("gameServiceImpl.isOwner(#id,#principal.name")
+    @DeleteMapping("/delete/{id}")
+    public String deleteGame(@PathVariable Long id,
+                             Principal principal){
+        gameService.deleteGame(id);
+        return "redirect:/game/all";
+    }
+
 
     @ModelAttribute
     public GameAddBindingModel gameAddBindingModel(){

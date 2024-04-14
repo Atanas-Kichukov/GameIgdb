@@ -36,7 +36,7 @@ public class GameAddBindingModel {
     @NotNull
     private String company;
     @NotNull
-    private Double averageRating;
+    private Double avgRating;
     private Integer ratingCount;
 
     public Long getId() {
@@ -129,12 +129,12 @@ public class GameAddBindingModel {
         return this;
     }
 
-    public Double getAverageRating() {
-        return averageRating;
+    public Double getAvgRating() {
+        return avgRating;
     }
 
-    public GameAddBindingModel setAverageRating(Double averageRating) {
-        this.averageRating = averageRating;
+    public GameAddBindingModel setAvgRating(Double avgRating) {
+        this.avgRating = avgRating;
         return this;
     }
 

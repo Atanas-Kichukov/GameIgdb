@@ -45,10 +45,10 @@ public class GameServiceImpl implements GameService {
 
         GameEntity newGame = modelMapper.map(gameAddServiceModel, GameEntity.class);
         UserEntity author = userService.findByUsername(username);
-        //PictureEntity picture = pictureService.createPictureEntity(gameAddServiceModel.getPicture());TODO fix nullPointerException
+        PictureEntity picture = pictureService.createPictureEntity(gameAddServiceModel.getPicture());
 
         newGame.setAuthor(author)
-               // .setPicture(picture) TODO fix nullPointerException
+                .setPicture(picture)
                 .setRatingCount(1)
                 .setCategories(gameAddServiceModel
                         .getCategories()
@@ -106,5 +106,11 @@ public class GameServiceImpl implements GameService {
 
         gameRepository.save(game);
 
+    }
+
+    @Override
+    public void deleteGame(Long id) {
+        GameEntity game = findById(id);
+        gameRepository.delete(game);
     }
 }

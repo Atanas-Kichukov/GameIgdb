@@ -18,7 +18,7 @@ public class GameAddServiceModel {
     private LocalDate releaseDate;
     private Set<GameCategoryEnum> categories;
     private UserEntity author;
-    private Double averageRating;
+    private Double avgRating;
     private Integer ratingCount;
 
     public Long getId() {
@@ -111,12 +111,12 @@ public class GameAddServiceModel {
         return this;
     }
 
-    public Double getAverageRating() {
-        return averageRating;
+    public Double getAvgRating() {
+        return avgRating;
     }
 
-    public GameAddServiceModel setAverageRating(Double averageRating) {
-        this.averageRating = averageRating;
+    public GameAddServiceModel setAvgRating(Double avgRating) {
+        this.avgRating = avgRating;
         return this;
     }
 

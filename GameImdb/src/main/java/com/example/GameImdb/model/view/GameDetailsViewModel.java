@@ -7,7 +7,7 @@ public class GameDetailsViewModel {
     private Integer ageRestriction;
     private String pictureUrl;
     private String videoUrl;
-    private Double averageRating;
+    private Double avgRating;
     private String author;
     private boolean isOwner;
 
@@ -76,12 +76,12 @@ public class GameDetailsViewModel {
         return this;
     }
 
-    public Double getAverageRating() {
-        return averageRating;
+    public Double getAvgRating() {
+        return avgRating;
     }
 
-    public GameDetailsViewModel setAverageRating(Double averageRating) {
-        this.averageRating = averageRating;
+    public GameDetailsViewModel setAvgRating(Double avgRating) {
+        this.avgRating = avgRating;
         return this;
     }
 

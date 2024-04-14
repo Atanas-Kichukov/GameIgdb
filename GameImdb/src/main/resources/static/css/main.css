@@ -67,7 +67,6 @@ font-weight: bold;
 }
 
 .game {
-    display: flex;
     justify-content: space-between;
 }
 #video {
@@ -85,6 +84,11 @@ display: flex;
     justify-content: center;
     align-items: center;
 }
+/*.read-more-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}*/
 .comments {
         width: 100%;
         padding-bottom: 20px;
@@ -106,6 +110,19 @@ display: flex;
         padding-left: 20px;
         padding-right: 20px;
     }
+.body-error {
+        background-image: url("/images/game-error.jpg");
+        background-size: 2000px;
+        min-height: 0;
+    }
+.description > p {
+    text-align: center;
+}
+.game #info-section {
+    text-align: center;
+}
+
+
 
 
 

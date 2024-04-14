@@ -7,6 +7,7 @@ import com.example.GameImdb.model.entity.UserEntity;
 import com.example.GameImdb.model.service.UserChangePasswordServiceModel;
 import com.example.GameImdb.model.service.UserEditProfileServiceModel;
 import com.example.GameImdb.model.service.UserServiceModel;
+import com.example.GameImdb.model.view.GameViewModel;
 import com.example.GameImdb.model.view.UserProfileViewModel;
 import com.example.GameImdb.service.UserService;
 
@@ -21,6 +22,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
 import java.security.Principal;
+import java.util.List;
 
 @Controller
 @RequestMapping("/users")
@@ -147,12 +149,18 @@ public class UserController {
         }
         UserEditProfileServiceModel userEditProfileServiceModel = modelMapper.map(userEditProfileBindingModel,UserEditProfileServiceModel.class);
         userService.editProfile(userEditProfileServiceModel,username);
-
-
-
-
-
         return "redirect:/users/profile/" + username;
+    }
+
+
+
+    @GetMapping("/profile/games/{username}")
+    public String viewAllGamesByUser(@PathVariable String username,Model model){
+        List<GameViewModel> allGamesByUser = userService.findAllGamesByUser(username);
+        model.addAttribute("allGames",allGamesByUser);
+        model.addAttribute("username",username + "'s");
+
+        return "users-games";
     }
 
     @ModelAttribute

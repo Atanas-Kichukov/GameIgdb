@@ -12,7 +12,7 @@
     <section class="py-4 text-center container">
         <div class="d-flex align-items-center justify-content-center">
             <img src="/images/details.png" width="40" height="40">
-        <h1 class="fw-light fst-italic text-info">Game details</h1>
+            <h1 class="fw-light fst-italic text-info">Game details</h1>
         </div>
     </section>
 
@@ -20,35 +20,32 @@
     <div class="container center details-info text-info" th:object="${gameWithDetails}">
         <h3 class="py-3 fw-normal" id="game-title" th:text="*{name}">Game title</h3>
         <span>Added by
-            <a class="username" th:text="*{author}">Username</a>
+            <a class="username" th:text="*{author}" th:href="@{/users/profile/{username}(username = *{author})}">Username</a>
+
         </span>
         <div class="game">
-            <section id="img-section">
-                <img class="details-img"
-
-                     alt="Game image">
-            </section>
-
-            <section id="info-section">
+            <div id="info-section">
                 <p class="bold-info">Age Restriction:
                     <span class="not-bold-info" th:text="*{ageRestriction}"></span>
                 </p>
                 <p class="bold-info">Rating:
-                    <span class="not-bold-info" th:text="*{averageRating}"></span>
+                    <span class="not-bold-info" th:text="*{avgRating}"></span>
                 </p>
-            </section>
+            </div>
 
         </div>
 
         <hr>
-        <section class="section-margin">
-            <h4 class="fw-normal"><u>Description:</u></h4>
-            <p th:text="*{description}">Description</p>
-        </section>
+        <div class="description">
+            <section class="section-margin">
+                <h4 class="fw-normal"><u>Description:</u></h4>
+                <p th:text="*{description}">Description</p>
+            </section>
+        </div>
         <hr>
         <div>
             <section id="video" class="video">
-                <iframe id="frame" th:src="'https://www.youtube.com/embed/' + *{videoUrl}" >
+                <iframe id="frame" th:src="'https://www.youtube.com/embed/' + *{videoUrl}">
                 </iframe>
             </section>
         </div>
@@ -95,7 +92,7 @@
                         </small>
                     </div>
 
-                    <div class="details-buttons"  >
+                    <div class="details-buttons">
                         <button type="submit"
                                 class="form-button btn btn-info d-flex justify-content-center align-items-center mt-2"
                                 id="postComment">Add comment

@@ -1,11 +1,13 @@
 package com.example.GameImdb.service.impl;
 
+import com.example.GameImdb.model.entity.GameEntity;
 import com.example.GameImdb.model.entity.UserEntity;
 import com.example.GameImdb.model.entity.UserRoleEntity;
 import com.example.GameImdb.model.entity.enums.UserRoleEnum;
 import com.example.GameImdb.model.service.UserChangePasswordServiceModel;
 import com.example.GameImdb.model.service.UserEditProfileServiceModel;
 import com.example.GameImdb.model.service.UserServiceModel;
+import com.example.GameImdb.model.view.GameViewModel;
 import com.example.GameImdb.repository.UserRepository;
 import com.example.GameImdb.repository.UserRoleRepository;
 import com.example.GameImdb.service.UserService;
@@ -19,7 +21,9 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -101,6 +105,17 @@ public boolean isUsernameFree(String username) {
                 .setAge(userEditProfileServiceModel.getAge());
 
         userRepository.save(user);
+    }
+
+    @Override
+    public List<GameViewModel> findAllGamesByUser(String username) {
+        UserEntity user = findByUsername(username);
+
+        return user.getGames()
+                .stream()
+                .sorted((g1, g2) -> g2.getAvgRating().compareTo(g1.getAvgRating()))
+                .map(gameEntity -> modelMapper.map(gameEntity, GameViewModel.class))
+                .collect(Collectors.toList());
     }
 
 }

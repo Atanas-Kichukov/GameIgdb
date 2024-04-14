@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
 
 <head th:replace="commons/fragments :: head"></head>
 
@@ -7,27 +8,30 @@
 <header th:replace="commons/fragments :: navbar"></header>
 
 <main>
-    <section class="py-4 text-center container">
-        <div class="d-flex align-items-center justify-content-center">
-            <img src="/images/computer-games.png" width="40" height="40">
-            <h1 class="fw-light fst-italic text-info">All Games</h1>
-        </div>
+    <section class="py-5 text-center container">
+        <h1 class="fw-light text-info fst-italic" th:text="${username} + ' games'">Games</h1>
     </section>
     <div class="album py-5 bg-light">
         <div class="container">
             <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
 
-                <div class="col" th:each="g :${allGames}" th:object="${g}">
+                <div class="col" th:each="g : ${allGames}" th:object="${g}">
                     <div class="card shadow-sm">
-                        <img class="bd-placeholder-img card-img-top-wrapper" th:src="*{pictureUrl}" alt="Game image">
+                        <img class="bd-placeholder-img card-img-top-wrapper"
+                             th:src="*{pictureUrl}"
+                             alt="Game image">
                         <div class="card-body pb-1">
-                            <h5 class="card-title text-info" th:text="*{name}">Game name</h5>
+                            <h5 class="card-title" th:text="*{name}">
+                                Game name</h5>
                         </div>
                         <div class="card-body">
-                            <p class="card-text text-info" th:text="${#strings.substring(g.description, 0, g.description.indexOf('.') + 1)}">Game description</p>
+                            <p class="card-text" th:text="*{description}">Game description</p>
                             <div class="d-flex justify-content-between align-items-center">
                                 <div class="btn-group">
-                                    <a type="button" class="btn btn-outline-secondary" th:href="@{/game/details/{id}(id = *{id})}" role="button">Read more</a>
+                                    <a type="button" class="btn btn-outline-secondary"
+                                       th:href="@{/game/details/{id}(id = *{id})}"
+                                       role="button">Read
+                                        more</a>
                                 </div>
                                 <small class="text-muted" th:text="*{avgRating}">Rating</small>
                             </div>

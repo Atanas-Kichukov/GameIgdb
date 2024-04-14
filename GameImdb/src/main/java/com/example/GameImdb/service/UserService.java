@@ -4,6 +4,9 @@ import com.example.GameImdb.model.entity.UserEntity;
 import com.example.GameImdb.model.service.UserChangePasswordServiceModel;
 import com.example.GameImdb.model.service.UserEditProfileServiceModel;
 import com.example.GameImdb.model.service.UserServiceModel;
+import com.example.GameImdb.model.view.GameViewModel;
+
+import java.util.List;
 
 public interface UserService {
 
@@ -18,4 +21,6 @@ public interface UserService {
     void userChangePasswordServiceModel(UserChangePasswordServiceModel newPassword, String username);
 
     void editProfile(UserEditProfileServiceModel userEditProfileServiceModel, String username);
+
+    List<GameViewModel> findAllGamesByUser(String username);
 }

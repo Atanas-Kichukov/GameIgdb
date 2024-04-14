@@ -11,4 +11,6 @@ public interface GameRepository extends JpaRepository<GameEntity,Long> {
 
     List<GameEntity> findAll();
 
+
+
 }

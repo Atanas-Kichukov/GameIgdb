@@ -9,11 +9,13 @@
 <main>
     <form>
         <div class="container" th:object="${user}">
-            <div class="row pt-5 pb-2 text-center">
-                <div class="col">
-                    <h1 class="fw-light text-black">Profile</h1>
+            <section class="py-4 text-center container">
+                <div class="d-flex align-items-center justify-content-center">
+                    <img src="/images/collection.png" width="40" height="40">
+                    <h1 class="fw-light text-info">Profile</h1>
                 </div>
-            </div>
+            </section>
+
             <div class="row justify-content-center">
                 <div class="col-md-6">
                     <div class="card mb-3 user-info">
@@ -22,7 +24,7 @@
                                 <div class="col-sm-3">
                                     <h6 class="mb-0">Username</h6>
                                 </div>
-                                <div class="col-sm-9 text-secondary">
+                                <div class="col-sm-9 text-info">
                                     <h7 class="mb-0" th:text="*{username}">Username</h7>
                                 </div>
                             </div>
@@ -31,7 +33,7 @@
                                 <div class="col-sm-3">
                                     <h6 class="mb-0">First name</h6>
                                 </div>
-                                <div class="col-sm-9 text-secondary">
+                                <div class="col-sm-9 text-info">
                                     <h7 class="mb-0" th:text="*{firstName}">First name</h7>
                                 </div>
                             </div>
@@ -40,7 +42,7 @@
                                 <div class="col-sm-3">
                                     <h6 class="mb-0">Last name</h6>
                                 </div>
-                                <div class="col-sm-9 text-secondary">
+                                <div class="col-sm-9 text-info">
                                     <h7 class="mb-0" th:text="*{lastName}">Last name</h7>
                                 </div>
                             </div>
@@ -49,7 +51,7 @@
                                 <div class="col-sm-3">
                                     <h6 class="mb-0">Email</h6>
                                 </div>
-                                <div class="col-sm-9 text-secondary">
+                                <div class="col-sm-9 text-info">
                                     <h7 class="mb-0" th:text="*{email}">Email</h7>
                                 </div>
                             </div>
@@ -57,7 +59,7 @@
                                 <div class="col-sm-3">
                                     <h6 class="mb-0">Age</h6>
                                 </div>
-                                <div class="col-sm-9 text-secondary">
+                                <div class="col-sm-9 text-info">
                                     <h7 class="mb-0" th:text="*{age}">Age</h7>
                                 </div>
                             </div>
@@ -65,15 +67,15 @@
                     </div>
                 </div>
             </div>
-            <div class="row justify-content-center" th:if="${isCurrentUser}">
+            <div class="row justify-content-center" >
                 <div class="col-md-6">
-                    <div class="row justify-content-center">
-                        <div class="col-sm-8 col-md-12 col-lg-4 mx-auto">
+                    <div class="row justify-content-center" >
+                        <div class="col-sm-8 col-md-12 col-lg-4 mx-auto"th:if="${isCurrentUser}">
                             <a th:href="@{/users/profile/edit-profile/{username}(username = *{username})}"
                                class="form-button mt-3 btn btn-info d-flex justify-content-around align-items-center"
                             >Edit profile</a>
                         </div>
-                        <div class="col-sm-8 col-md-12 col-lg-4 mx-auto">
+                        <div class="col-sm-8 col-md-12 col-lg-4 mx-auto" th:if="${isCurrentUser}" >
                             <a th:href="@{/users/profile/change-password/{username}(username = *{username})}"
                                class="form-button mt-3 btn btn-info d-flex justify-content-around align-items-center"
                             >Change password</a>

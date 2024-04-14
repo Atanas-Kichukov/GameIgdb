@@ -23,4 +23,7 @@ public interface GameService {
     GameEditViewModel getEditViewModel(Long id);
 
     void editGame(GameEditServiceModel gameEditServiceModel);
+
+    void deleteGame(Long id);
 }
+

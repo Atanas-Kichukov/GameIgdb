@@ -100,16 +100,18 @@
             </div>
             <div class="form-group">
                 <input type="file"
+                       th:field="*{picture}"
+                       th:errorclass="is-invalid"
                        id="picture"
                        class="form-control-file"
-                       aria-describedby="inputPictureError">
+                       aria-describedby="inputPictureError" required>
             </div>
         </div>
         <div class="form-group">
             <label for="inputName" class="col-form-label ">Rating</label>
         </div>
         <div class="form-group">
-            <input th:field="*{averageRating}"
+            <input th:field="*{avgRating}"
                    th:errorclass="is-invalid"
                    type="number"
                    step="0.1"

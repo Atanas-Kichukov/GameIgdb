@@ -26,7 +26,7 @@ public class GameEntity extends BaseEntity {
     @Column(nullable = false)
     private String company;
     @Column(nullable = false)
-    private Double averageRating;
+    private Double avgRating;
     private Integer ratingCount;
     @ManyToOne
     private UserEntity author;
@@ -120,15 +120,6 @@ public class GameEntity extends BaseEntity {
         return this;
     }
 
-    public Double getAverageRating() {
-        return averageRating;
-    }
-
-    public GameEntity setAverageRating(Double averageRating) {
-        this.averageRating = averageRating;
-        return this;
-    }
-
     public Integer getRatingCount() {
         return ratingCount;
     }
@@ -144,6 +135,15 @@ public class GameEntity extends BaseEntity {
 
     public GameEntity setAuthor(UserEntity author) {
         this.author = author;
+        return this;
+    }
+
+    public Double getAvgRating() {
+        return avgRating;
+    }
+
+    public GameEntity setAvgRating(Double avgRating) {
+        this.avgRating = avgRating;
         return this;
     }
 }
