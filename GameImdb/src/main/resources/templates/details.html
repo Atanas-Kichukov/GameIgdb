@@ -28,9 +28,10 @@
                 <p class="bold-info">Age Restriction:
                     <span class="not-bold-info" th:text="*{ageRestriction}"></span>
                 </p>
-                <p class="bold-info">Rating:
-                    <span class="not-bold-info" th:text="*{avgRating}"></span>
-                </p>
+                <a th:href="@{/game/details/rate-game/{id}(id = *{id})}" class="bold-info">
+                    Rating:
+                    <span class="not-bold-info" th:text="${#strings.substring(gameWithDetails.avgRating, 0, 3)}"></span>
+                </a>
             </div>
 
         </div>

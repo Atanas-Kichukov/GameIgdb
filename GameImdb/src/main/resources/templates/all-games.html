@@ -29,7 +29,7 @@
                                 <div class="btn-group">
                                     <a type="button" class="btn btn-outline-secondary" th:href="@{/game/details/{id}(id = *{id})}" role="button">Read more</a>
                                 </div>
-                                <small class="text-muted" th:text="*{avgRating}">Rating</small>
+                                <small class="text-muted" th:text="${#strings.substring(g.avgRating, 0, 3)}">Rating</small>
                             </div>
                         </div>
                     </div>

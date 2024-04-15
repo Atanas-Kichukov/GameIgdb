@@ -5,9 +5,11 @@ import com.example.GameImdb.model.entity.PictureEntity;
 import com.example.GameImdb.model.entity.UserEntity;
 import com.example.GameImdb.model.service.GameAddServiceModel;
 import com.example.GameImdb.model.service.GameEditServiceModel;
+import com.example.GameImdb.model.service.RateGameServiceModel;
 import com.example.GameImdb.model.view.GameDetailsViewModel;
 import com.example.GameImdb.model.view.GameEditViewModel;
 import com.example.GameImdb.model.view.GameViewModel;
+import com.example.GameImdb.model.view.RateGameViewModel;
 import com.example.GameImdb.repository.GameRepository;
 import com.example.GameImdb.service.GameCategoryService;
 import com.example.GameImdb.service.GameService;
@@ -73,13 +75,13 @@ public class GameServiceImpl implements GameService {
         GameEntity gameEntity = findById(id);
         GameDetailsViewModel gameDetailsViewModel = modelMapper.map(gameEntity, GameDetailsViewModel.class);
         gameDetailsViewModel.setAuthor(gameEntity.getAuthor().getUsername());
-        gameDetailsViewModel.setOwner(isOwner(id,name));
+        gameDetailsViewModel.setOwner(isOwner(id, name));
         return gameDetailsViewModel;
     }
 
     @Override
     public GameEntity findById(Long id) {
-        return gameRepository.findById(id).orElseThrow(() ->new ObjectNotFoundException("Game with id" + id + "is not found"));
+        return gameRepository.findById(id).orElseThrow(() -> new ObjectNotFoundException("Game with id" + id + "is not found"));
     }
 
     @Override
@@ -112,5 +114,22 @@ public class GameServiceImpl implements GameService {
     public void deleteGame(Long id) {
         GameEntity game = findById(id);
         gameRepository.delete(game);
+    }
+
+    @Override
+    public void addRating(RateGameServiceModel rateGameServiceModel) {
+        GameEntity game = findById(rateGameServiceModel.getId());
+        int allRatings = game.getRatingCount() + 1;
+        double newRating = (game.getAvgRating() * game.getRatingCount() + rateGameServiceModel.getAvgRating()) /allRatings;
+
+        game.setRatingCount(game.getRatingCount() + 1);
+        game.setAvgRating(newRating);
+        gameRepository.save(game);
+    }
+
+    @Override
+    public RateGameViewModel getRateGameViewModel(Long id) {
+        GameEntity game = findById(id);
+        return modelMapper.map(game, RateGameViewModel.class);
     }
 }
