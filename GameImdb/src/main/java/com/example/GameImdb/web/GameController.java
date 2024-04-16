@@ -102,7 +102,10 @@ public class GameController {
     }
 
     @GetMapping("/details/rate-game/{id}")
-    public String rateGame(@PathVariable Long id,Model model) {
+    public String rateGame(@PathVariable Long id,Model model,Principal principal) {
+        if(gameService.hasUserAlreadyRatedGame(principal.getName(),gameService.findById(id))){
+            return "already-rated";
+        }
         RateGameViewModel rateGameViewModel = gameService.getRateGameViewModel(id);
         RateGameBindingModel rateGameBindingModel = modelMapper.map(rateGameViewModel, RateGameBindingModel.class);
         model.addAttribute("rateGameBindingModel",rateGameBindingModel);
@@ -110,7 +113,10 @@ public class GameController {
     }
 
     @PatchMapping("/details/rate-game/{id}")
-    public String rateGameConfirm(@PathVariable Long id, @Valid RateGameBindingModel rateGameBindingModel, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
+    public String rateGameConfirm(@PathVariable Long id, @Valid RateGameBindingModel rateGameBindingModel,
+                                  BindingResult bindingResult,
+                                  RedirectAttributes redirectAttributes,
+                                  Principal principal) {
 
         if (bindingResult.hasErrors()) {
             redirectAttributes.addFlashAttribute("rateGameBindingModel", rateGameBindingModel);
@@ -118,7 +124,7 @@ public class GameController {
             return "redirect:/game/details/rate-game/" + id;
         }
         RateGameServiceModel rateGameServiceModel = modelMapper.map(rateGameBindingModel, RateGameServiceModel.class);
-        gameService.addRating(rateGameServiceModel);
+        gameService.addRating(rateGameServiceModel,principal.getName());
         return "redirect:/game/details/" + id;
     }
 

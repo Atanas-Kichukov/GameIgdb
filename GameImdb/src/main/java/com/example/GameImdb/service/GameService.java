@@ -28,8 +28,10 @@ public interface GameService {
 
     void deleteGame(Long id);
 
-    void addRating(RateGameServiceModel rateGameServiceModel);
+    void addRating(RateGameServiceModel rateGameServiceModel, String username);
 
     RateGameViewModel getRateGameViewModel(Long id);
+
+    boolean hasUserAlreadyRatedGame(String username, GameEntity game);
 }
 

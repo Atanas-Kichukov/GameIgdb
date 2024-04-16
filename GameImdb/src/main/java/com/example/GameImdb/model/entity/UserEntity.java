@@ -3,6 +3,7 @@ package com.example.GameImdb.model.entity;
 
 import javax.persistence.*;
 import javax.validation.constraints.Positive;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -25,6 +26,8 @@ public class UserEntity extends BaseEntity{
     private Set<UserRoleEntity> roles;
     @OneToMany(mappedBy = "author",fetch = FetchType.EAGER)
     private Set<GameEntity> games;
+    @OneToMany(fetch = FetchType.EAGER)
+    private List<GameEntity> ratedGames;
 
     public String getUsername() {
         return username;
@@ -95,6 +98,15 @@ public class UserEntity extends BaseEntity{
 
     public UserEntity setGames(Set<GameEntity> games) {
         this.games = games;
+        return this;
+    }
+
+    public List<GameEntity> getRatedGames() {
+        return ratedGames;
+    }
+
+    public UserEntity setRatedGames(List<GameEntity> ratedGames) {
+        this.ratedGames = ratedGames;
         return this;
     }
 }

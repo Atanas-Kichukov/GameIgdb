@@ -17,13 +17,11 @@ import com.example.GameImdb.service.PictureService;
 import com.example.GameImdb.service.UserService;
 import com.example.GameImdb.service.exception.ObjectNotFoundException;
 import org.modelmapper.ModelMapper;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.io.IOException;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -117,19 +115,34 @@ public class GameServiceImpl implements GameService {
     }
 
     @Override
-    public void addRating(RateGameServiceModel rateGameServiceModel) {
+    public void addRating(RateGameServiceModel rateGameServiceModel, String username) {
+        UserEntity user = userService.findByUsername(username);
         GameEntity game = findById(rateGameServiceModel.getId());
+        user.getRatedGames().add(game);
         int allRatings = game.getRatingCount() + 1;
         double newRating = (game.getAvgRating() * game.getRatingCount() + rateGameServiceModel.getAvgRating()) /allRatings;
-
         game.setRatingCount(game.getRatingCount() + 1);
         game.setAvgRating(newRating);
         gameRepository.save(game);
+        userService.save(user);
     }
 
     @Override
     public RateGameViewModel getRateGameViewModel(Long id) {
         GameEntity game = findById(id);
         return modelMapper.map(game, RateGameViewModel.class);
+    }
+
+    @Override
+    public boolean hasUserAlreadyRatedGame(String username, GameEntity game) {
+        UserEntity user = userService.findByUsername(username);
+        List<GameEntity> ratedGames = user.getRatedGames();
+        for (GameEntity ratedGame : ratedGames) {
+            if (ratedGame.getName().equals(game.getName())) {
+                return true;
+            }
+        }
+
+        return false;
     }
 }

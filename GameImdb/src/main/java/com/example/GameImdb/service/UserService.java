@@ -23,4 +23,6 @@ public interface UserService {
     void editProfile(UserEditProfileServiceModel userEditProfileServiceModel, String username);
 
     List<GameViewModel> findAllGamesByUser(String username);
+
+    void save(UserEntity user);
 }

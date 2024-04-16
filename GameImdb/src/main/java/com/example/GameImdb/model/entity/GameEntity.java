@@ -4,6 +4,7 @@ package com.example.GameImdb.model.entity;
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 
 @Entity
@@ -31,8 +32,9 @@ public class GameEntity extends BaseEntity {
     @ManyToOne
     private UserEntity author;
 
-    @OneToMany(mappedBy = "game",fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "game", fetch = FetchType.LAZY)
     private List<CommentEntity> comments;
+
 
     public List<CommentEntity> getComments() {
         return comments;
@@ -69,7 +71,6 @@ public class GameEntity extends BaseEntity {
         this.categories = categories;
         return this;
     }
-
 
 
     public String getVideoUrl() {
@@ -145,5 +146,22 @@ public class GameEntity extends BaseEntity {
     public GameEntity setAvgRating(Double avgRating) {
         this.avgRating = avgRating;
         return this;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null || getClass() != obj.getClass()) {
+            return false;
+        }
+        GameEntity game = (GameEntity) obj;
+        return Objects.equals(name, game.name);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name);
     }
 }

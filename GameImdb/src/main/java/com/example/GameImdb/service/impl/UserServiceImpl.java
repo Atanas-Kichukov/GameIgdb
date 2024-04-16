@@ -118,4 +118,9 @@ public boolean isUsernameFree(String username) {
                 .collect(Collectors.toList());
     }
 
+    @Override
+    public void save(UserEntity user) {
+        userRepository.save(user);
+    }
+
 }
