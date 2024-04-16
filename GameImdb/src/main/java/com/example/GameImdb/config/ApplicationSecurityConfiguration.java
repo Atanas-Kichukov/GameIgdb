@@ -26,11 +26,9 @@ public class ApplicationSecurityConfiguration extends WebSecurityConfigurerAdapt
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
                 .requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll()
-                .antMatchers("/", "/users/login", "/users/register").permitAll()
-                // This permits statistics page only for admins.
-                //.antMatchers("/statistics").hasRole(UserRoleEnum.ADMIN.name())
-                // Here we forbid all other pages for unauthenticated users.
-                //.antMatchers("/**").authenticated()
+                .antMatchers("/", "/users/login", "/users/register", "/game/all","/about").permitAll()
+                .antMatchers("/statistics").hasRole(UserRoleEnum.ADMIN.name())
+                .antMatchers("/**").authenticated()
                 .and()
                 .formLogin()
                 .loginPage("/users/login")

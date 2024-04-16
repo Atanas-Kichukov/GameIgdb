@@ -3,6 +3,8 @@ package com.example.GameImdb.service.impl;
 import com.example.GameImdb.model.entity.GameEntity;
 import com.example.GameImdb.model.entity.PictureEntity;
 import com.example.GameImdb.model.entity.UserEntity;
+import com.example.GameImdb.model.entity.UserRoleEntity;
+import com.example.GameImdb.model.entity.enums.UserRoleEnum;
 import com.example.GameImdb.model.service.GameAddServiceModel;
 import com.example.GameImdb.model.service.GameEditServiceModel;
 import com.example.GameImdb.model.service.RateGameServiceModel;
@@ -87,7 +89,10 @@ public class GameServiceImpl implements GameService {
         GameEntity gameEntity = findById(id);
         UserEntity user = userService.findByUsername(username);
 
-        return user.getUsername().equals(gameEntity.getAuthor().getUsername());
+
+
+        return isAdmin(user) || user.getUsername().equals(gameEntity.getAuthor().getUsername());
+
     }
 
     @Override
@@ -142,7 +147,13 @@ public class GameServiceImpl implements GameService {
                 return true;
             }
         }
-
         return false;
+    }
+
+    private boolean isAdmin(UserEntity user){
+        return user.getRoles()
+                .stream()
+                .map(UserRoleEntity::getRole)
+                .anyMatch(roleEnum -> roleEnum == UserRoleEnum.ADMIN);
     }
 }
