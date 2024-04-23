@@ -28,7 +28,7 @@ public class GameAddBindingModel {
     @Size(min = 10)
     @NotNull
     private String description;
-    @PastOrPresent
+
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     @NotNull
     private LocalDate releaseDate;

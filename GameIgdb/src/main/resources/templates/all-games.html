@@ -19,7 +19,7 @@
 
                 <div class="col" th:each="g :${allGames}" th:object="${g}"  style="margin-bottom: 20px;">
                     <div class="card shadow-sm">
-                        <img class="bd-placeholder-img card-img-top-wrapper" th:src="*{pictureUrl}" alt="Game image">
+                        <img class="bd-placeholder-img card-img-top-wrapper image-size" th:src="*{pictureUrl}" alt="Game image">
                         <div class="card-body pb-1">
                             <h5 class="card-title text-info" th:text="*{name}">Game name</h5>
                         </div>
