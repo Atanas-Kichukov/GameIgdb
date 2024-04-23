@@ -37,6 +37,7 @@ border-radius: 25px
 .form-button{
 text-align:center;
 width: 130px;
+height: 50px;
 }
 .about-container {
 width: 450px;
@@ -127,20 +128,21 @@ display: flex;
     flex-wrap: wrap;
     justify-content: center;
     margin: 0 auto;
-    max-width: 600px; /* Adjust as needed */
+    max-width: 600px;
 }
 
 .category-checkbox {
-    margin: 10px; /* Adjust this value as needed for spacing between categories */
-    flex: 1 0 65%; /* Each checkbox takes up to 45% of the container's width */
-    max-width: 200px; /* Adjust as needed */
+    margin: 10px;
+    flex: 1 0 65%;
+    max-width: 200px;
 }
 
 @media (max-width: 600px) {
     .category-checkbox {
-        flex-basis: 100%; /* On smaller screens, each checkbox takes up 100% of the container's width */
+        flex-basis: 100%;
     }
 }
+
 
 
 

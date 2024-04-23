@@ -32,7 +32,7 @@ public class GameEntity extends BaseEntity {
     @ManyToOne
     private UserEntity author;
 
-    @OneToMany(mappedBy = "game", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "game", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<CommentEntity> comments;
 
 

@@ -1,7 +1,7 @@
 spring:
   datasource:
     driverClassName: com.mysql.cj.jdbc.Driver
-    url: "jdbc:mysql://localhost:3306/test_na_proekta?useSSL=false&createDatabaseIfNotExist=true"
+    url: "jdbc:mysql://localhost:3306/GameIgdb?useSSL=false&createDatabaseIfNotExist=true"
     username: root
     password: 22.02.2023Ap
   servlet:

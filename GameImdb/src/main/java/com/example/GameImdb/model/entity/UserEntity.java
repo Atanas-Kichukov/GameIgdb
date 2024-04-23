@@ -22,12 +22,14 @@ public class UserEntity extends BaseEntity{
     @Positive
     @Column(nullable = false)
     private Integer age;
+
     @ManyToMany(fetch = FetchType.EAGER)
     private Set<UserRoleEntity> roles;
     @OneToMany(mappedBy = "author",fetch = FetchType.EAGER)
     private Set<GameEntity> games;
     @OneToMany(fetch = FetchType.EAGER)
     private List<GameEntity> ratedGames;
+
 
     public String getUsername() {
         return username;
@@ -109,4 +111,5 @@ public class UserEntity extends BaseEntity{
         this.ratedGames = ratedGames;
         return this;
     }
+
 }

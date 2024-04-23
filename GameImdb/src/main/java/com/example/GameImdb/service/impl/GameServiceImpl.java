@@ -13,10 +13,7 @@ import com.example.GameImdb.model.view.GameEditViewModel;
 import com.example.GameImdb.model.view.GameViewModel;
 import com.example.GameImdb.model.view.RateGameViewModel;
 import com.example.GameImdb.repository.GameRepository;
-import com.example.GameImdb.service.GameCategoryService;
-import com.example.GameImdb.service.GameService;
-import com.example.GameImdb.service.PictureService;
-import com.example.GameImdb.service.UserService;
+import com.example.GameImdb.service.*;
 import com.example.GameImdb.service.exception.ObjectNotFoundException;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
@@ -33,13 +30,15 @@ public class GameServiceImpl implements GameService {
     private final UserService userService;
     private final PictureService pictureService;
     private final GameCategoryService gameCategoryService;
+    private final CloudinaryService cloudinaryService;
 
-    public GameServiceImpl(ModelMapper modelMapper, GameRepository gameRepository, UserService userService, PictureService pictureService, GameCategoryService gameCategoryService) {
+    public GameServiceImpl(ModelMapper modelMapper, GameRepository gameRepository, UserService userService, PictureService pictureService, GameCategoryService gameCategoryService, CloudinaryService cloudinaryService) {
         this.modelMapper = modelMapper;
         this.gameRepository = gameRepository;
         this.userService = userService;
         this.pictureService = pictureService;
         this.gameCategoryService = gameCategoryService;
+        this.cloudinaryService = cloudinaryService;
     }
 
     @Override
@@ -81,7 +80,7 @@ public class GameServiceImpl implements GameService {
 
     @Override
     public GameEntity findById(Long id) {
-        return gameRepository.findById(id).orElseThrow(() -> new ObjectNotFoundException("Game with id" + id + "is not found"));
+        return gameRepository.findById(id).orElseThrow(() -> new ObjectNotFoundException("Game with id " + id + " is not found"));
     }
 
     @Override
@@ -116,7 +115,9 @@ public class GameServiceImpl implements GameService {
     @Override
     public void deleteGame(Long id) {
         GameEntity game = findById(id);
-        gameRepository.delete(game);
+        if(cloudinaryService.delete(game.getPicture().getPublicId())) {
+            gameRepository.delete(game);
+        }
     }
 
     @Override
@@ -126,8 +127,9 @@ public class GameServiceImpl implements GameService {
         user.getRatedGames().add(game);
         int allRatings = game.getRatingCount() + 1;
         double newRating = (game.getAvgRating() * game.getRatingCount() + rateGameServiceModel.getAvgRating()) /allRatings;
+        double roundedRating = Math.round(newRating * 10) / 10.0;
         game.setRatingCount(game.getRatingCount() + 1);
-        game.setAvgRating(newRating);
+        game.setAvgRating(roundedRating);
         gameRepository.save(game);
         userService.save(user);
     }

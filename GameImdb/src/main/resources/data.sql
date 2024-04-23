@@ -49,7 +49,7 @@ VALUES(9,'CO-OP');
 
 -- games and pictures
 INSERT INTO pictures(id,url,public_id)
-VALUES(1, 'https://res.cloudinary.com/dwfhxuzqh/image/upload/v1713100382/dxnlczhsvnvvznjp0pum.webp','Valorant');
+VALUES(1, 'https://res.cloudinary.com/dwfhxuzqh/image/upload/v1713100382/dxnlczhsvnvvznjp0pum.webp','dxnlczhsvnvvznjp0pum.webp');
 INSERT INTO games(id, name, age_restriction, picture_id, video_url, description, release_date, company, avg_rating, rating_count, author_id)
 VALUES(1, 'Valorant', 16, 1, 'Wrdh5HrOCMc','Valorant is a free-to-play first-person tactical hero shooter developed and published by Riot Games,
 for Windows. Teased under the codename Project A in October 2019, the game began a closed beta period with limited access on April 7, 2020,
@@ -59,22 +59,22 @@ INSERT INTO games_categories(game_entity_id, categories_id)
 VALUES(1,5);
 
 INSERT INTO pictures(id,url,public_id)
-VALUES(2, 'https://res.cloudinary.com/dwfhxuzqh/image/upload/v1713098504/lwdcmydcwuqjwgxirhk2.jpg','League Of Legends');
+VALUES(2, 'https://res.cloudinary.com/dwfhxuzqh/image/upload/v1713098504/lwdcmydcwuqjwgxirhk2.jpg','lwdcmydcwuqjwgxirhk2.jpg');
 INSERT INTO games(id, name, age_restriction, picture_id, video_url, description, release_date, company, avg_rating, rating_count, author_id)
 VALUES(2, 'League Of Legends', 13, 2, 'p4QG59y6FGE','League of Legends (LoL), commonly referred to as League, is a 2009 multiplayer online battle
  arena video game developed and published by Riot Games. Inspired by Defense of the Ancients, a custom map for Warcraft III. Since its release in
  October 2009, League has been free-to-play and is monetized through purchasable character customization. The game is available for Microsoft Windows
-  and macOS. In the game, two teams of five players battle in player-versus-player combat, each team occupying and defending their half of the map.
-  Each of the ten players controls a character, known as a "champion", with unique abilities and differing styles of play. During a match, champions
-  become more powerful by collecting experience points, earning gold, and purchasing items to defeat the opposing team. In Leagues main mode, Summoners Rift
-  , a team wins by pushing through to the enemy base and destroying their "Nexus", a large structure located within.', '2009-10-27', 'Riot Games', 4.6,1,1);
+and macOS. In the game, two teams of five players battle in player-versus-player combat, each team occupying and defending their half of the map.
+ Each of the ten players controls a character, known as a "champion", with unique abilities and differing styles of play. During a match, champions
+ become more powerful by collecting experience points, earning gold, and purchasing items to defeat the opposing team. In Leagues main mode, Summoners Rift
+ , a team wins by pushing through to the enemy base and destroying their "Nexus", a large structure located within.', '2009-10-27', 'Riot Games', 4.6,1,1);
 INSERT INTO games_categories(game_entity_id, categories_id)
 VALUES(1,1);
 INSERT INTO games_categories(game_entity_id, categories_id)
 VALUES(1,2);
 
 INSERT INTO pictures(id,url,public_id)
-VALUES(3, 'https://res.cloudinary.com/dwfhxuzqh/image/upload/v1713377122/rneke9cgdnbw5z6kkudz.jpg','Need For Speed Payback');
+VALUES(3, 'https://res.cloudinary.com/dwfhxuzqh/image/upload/v1713377122/rneke9cgdnbw5z6kkudz.jpg','rneke9cgdnbw5z6kkudz.jpg');
 INSERT INTO games(id, name, age_restriction, picture_id, video_url, description, release_date, company, avg_rating, rating_count, author_id)
 VALUES(3, 'Need For Speed Payback', 12, 3, 'kc-OcOduEx0','Set in the underworld of Fortune Valley, you and your crew were divided by betrayal and
 reunited by revenge to take down The House, a nefarious cartel that rules the city’s casinos, criminals and cops. In this corrupt gambler’s paradise
@@ -87,7 +87,7 @@ INSERT INTO games_categories(game_entity_id, categories_id)
 VALUES(3,2);
 
 INSERT INTO pictures(id,url,public_id)
-VALUES(4, 'https://res.cloudinary.com/dwfhxuzqh/image/upload/v1713377083/ysuxnybff2tilksalnys.webp','MortalKombat11');
+VALUES(4, 'https://res.cloudinary.com/dwfhxuzqh/image/upload/v1713377083/ysuxnybff2tilksalnys.webp','ysuxnybff2tilksalnys.webp');
 INSERT INTO games(id, name, age_restriction, picture_id, video_url, description, release_date, company, avg_rating, rating_count, author_id)
 VALUES(4, 'Mortal Kombat 11 Ultimate', 18, 4, '86D2q2Uvg9M','Mortal Kombat: Deception is a 2004 fighting game developed and published by Midway.
  It is the sixth main installment in the Mortal Kombat franchise and a sequel to 2002 Mortal Kombat: Deadly Alliance. It was released for the
@@ -128,7 +128,7 @@ INSERT INTO games_categories(game_entity_id, categories_id)
 VALUES(5,2);
 
 INSERT INTO pictures(id,url,public_id)
-VALUES(6, 'https://res.cloudinary.com/dwfhxuzqh/image/upload/v1713376968/v2ahdfrfa8u8rsxbx5vk.webp','EldenRing');
+VALUES(6, 'https://res.cloudinary.com/dwfhxuzqh/image/upload/v1713376968/v2ahdfrfa8u8rsxbx5vk.webp','wql5uhmevcxwatrxbeib.webp');
 INSERT INTO games(id, name, age_restriction, picture_id, video_url, description, release_date, company, avg_rating, rating_count, author_id)
 VALUES(6, 'Elden Ring', 16, 6, 'AKXiKBnzpBQ','Elden Ring is a 2022 action role-playing game developed by FromSoftware.
  It was directed by Hidetaka Miyazaki with worldbuilding provided by fantasy writer George R. R. Martin. It was published

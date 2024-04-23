@@ -67,15 +67,15 @@
                     </div>
                 </div>
             </div>
-            <div class="row justify-content-center" >
+            <div class="row justify-content-center">
                 <div class="col-md-6">
-                    <div class="row justify-content-center" >
-                        <div class="col-sm-8 col-md-12 col-lg-4 mx-auto"th:if="${isCurrentUser}">
+                    <div class="row justify-content-center">
+                        <div class="col-sm-8 col-md-12 col-lg-4 mx-auto" th:if="${isCurrentUser}">
                             <a th:href="@{/users/profile/edit-profile/{username}(username = *{username})}"
                                class="form-button mt-3 btn btn-info d-flex justify-content-around align-items-center"
                             >Edit profile</a>
                         </div>
-                        <div class="col-sm-8 col-md-12 col-lg-4 mx-auto" th:if="${isCurrentUser}" >
+                        <div class="col-sm-8 col-md-12 col-lg-4 mx-auto" th:if="${isCurrentUser}">
                             <a th:href="@{/users/profile/change-password/{username}(username = *{username})}"
                                class="form-button mt-3 btn btn-info d-flex justify-content-around align-items-center"
                             >Change password</a>
@@ -93,6 +93,8 @@
 </main>
 
 <footer th:replace="commons/fragments :: footer"></footer>
+
+<script th:src="@{/js/blockUser.js}"></script>
 </body>
 
 </html>

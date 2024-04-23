@@ -25,4 +25,5 @@ public interface UserService {
     List<GameViewModel> findAllGamesByUser(String username);
 
     void save(UserEntity user);
+
 }

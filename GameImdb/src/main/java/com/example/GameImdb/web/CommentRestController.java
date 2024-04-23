@@ -49,8 +49,11 @@ public class CommentRestController {
     @ExceptionHandler (MethodArgumentNotValidException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public ResponseEntity<ApiError> onValidationFailure(MethodArgumentNotValidException exception){
+
         ApiError apiError = new ApiError(HttpStatus.BAD_REQUEST);
+
         exception.getFieldErrors().forEach(fe -> apiError.addFieldWithError(fe.getField()));
+
         return ResponseEntity.badRequest().body(apiError);
     }
 }

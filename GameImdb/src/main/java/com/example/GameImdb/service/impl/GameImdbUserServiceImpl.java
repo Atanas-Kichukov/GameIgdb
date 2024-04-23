@@ -33,7 +33,8 @@ public class GameImdbUserServiceImpl implements UserDetailsService {
                 userEntity
                         .getRoles()
                         .stream()
-                        .map(r -> new SimpleGrantedAuthority("ROLE_" + r.getRole().name())).collect(Collectors.toList());
+                        .map(r -> new SimpleGrantedAuthority("ROLE_" + r.getRole().name()))
+                        .collect(Collectors.toList());
 
 
 
