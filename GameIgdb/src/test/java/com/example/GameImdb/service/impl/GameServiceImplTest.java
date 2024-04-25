@@ -33,7 +33,6 @@ import java.util.Optional;
 import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
@@ -112,7 +111,6 @@ class GameServiceImplTest {
                 .setAge(13)
                 .setRatedGames(new ArrayList<>());
         game1.setAuthor(testUser);
-        game2.setAuthor(testUser);
 
     }
 
@@ -291,8 +289,21 @@ class GameServiceImplTest {
     }
 
     @Test
-    public void testHasUserAlreadyRatedGame() {
+    public void testUserHasAlreadyRatedGame() {
     String username = "test";
     when(userService.findByUsername(username)).thenReturn(testUser);
+
+    List<GameEntity> testRatedGames = testUser.getRatedGames();
+    testUser.setRatedGames(List.of(game1));
+    assertTrue(testService.hasUserAlreadyRatedGame(username,game1));
+
+    }
+    @Test
+    public void testUserHasntRatedGame(){
+        String username = "test";
+        when(userService.findByUsername(username)).thenReturn(testUser);
+        List<GameEntity> testRatedGames = testUser.getRatedGames();
+        testUser.setRatedGames(List.of(game1));
+        assertFalse(testService.hasUserAlreadyRatedGame(username,game2));
     }
 }
