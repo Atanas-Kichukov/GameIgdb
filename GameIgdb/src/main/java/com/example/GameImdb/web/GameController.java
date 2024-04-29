@@ -100,7 +100,6 @@ public class GameController {
         gameService.deleteGame(id);
         return "redirect:/game/all";
     }
-
     @GetMapping("/details/rate-game/{id}")
     public String rateGame(@PathVariable Long id,Model model,Principal principal) {
         if(gameService.hasUserAlreadyRatedGame(principal.getName(),gameService.findById(id))){

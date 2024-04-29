@@ -122,7 +122,4 @@ class CommentServiceImplTest {
         assertEquals(testComments.size(),1 );
 
     }
-
-
-
 }

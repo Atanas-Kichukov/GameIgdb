@@ -43,7 +43,7 @@ VALUES(7,'MOBA');
 INSERT INTO game_categories(id,categories)
 VALUES(8,'MMORPG');
 INSERT INTO game_categories(id,categories)
-VALUES(9,'CO-OP');
+VALUES(9,'CO_OP');
 
 
 

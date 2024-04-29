@@ -1,5 +1,13 @@
 package com.example.GameImdb.model.view;
 
+
+import com.example.GameImdb.model.entity.GameCategoryEntity;
+
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.List;
+
+
 public class GameDetailsViewModel {
     private Long id;
     private String name;
@@ -9,6 +17,9 @@ public class GameDetailsViewModel {
     private String videoUrl;
     private Double avgRating;
     private String author;
+    private String releaseDate;
+    private String company;
+
     private boolean isOwner;
 
     public Long getId() {
@@ -91,6 +102,24 @@ public class GameDetailsViewModel {
 
     public GameDetailsViewModel setOwner(boolean owner) {
         isOwner = owner;
+        return this;
+    }
+
+    public String getReleaseDate() {
+        return releaseDate;
+    }
+
+    public GameDetailsViewModel setReleaseDate(LocalDate releaseDate) {
+        this.releaseDate = DateTimeFormatter.ofPattern("dd-MM-yyyy").format(releaseDate);
+        return this;
+    }
+
+    public String getCompany() {
+        return company;
+    }
+
+    public GameDetailsViewModel setCompany(String company) {
+        this.company = company;
         return this;
     }
 }

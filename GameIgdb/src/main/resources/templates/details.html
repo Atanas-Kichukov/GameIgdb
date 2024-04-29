@@ -13,6 +13,8 @@
         <div class="d-flex align-items-center justify-content-center">
             <img src="/images/details.png" width="40" height="40">
             <h1 class="fw-light fst-italic text-info">Game details</h1>
+            <br/>
+
         </div>
     </section>
 
@@ -21,19 +23,28 @@
         <h3 class="py-3 fw-normal" id="game-title" th:text="*{name}">Game title</h3>
         <span>Added by
             <a class="username" th:text="*{author}" th:href="@{/users/profile/{username}(username = *{author})}">Username</a>
-
+            <br/>
         </span>
         <div class="game">
-            <div id="info-section">
-                <p class="bold-info">Age Restriction:
-                    <span class="not-bold-info" th:text="*{ageRestriction}"></span>
-                </p>
-                <a th:href="@{/game/details/rate-game/{id}(id = *{id})}" class="bold-info">
-                    Rating:
-                    <span class="not-bold-info" th:text="${#strings.substring(gameWithDetails.avgRating, 0, 3)}"></span>
-                </a>
+            <div id="info-section-left">
+                <div class="left">
+                    <h6>Age Restriction:
+                        <span class="not-bold-info" th:text="*{ageRestriction}"></span>
+                    </h6>
+                    <h6>Developer(s):
+                        <span class="not-bold-info" th:text="*{company}"></span>
+                    </h6>
+                </div>
+                <div class="right">
+                    <a th:href="@{/game/details/rate-game/{id}(id = *{id})}">
+                        Rating:
+                        <span class="not-bold-info" th:text="${#strings.substring(gameWithDetails.avgRating, 0, 3)}"></span>
+                    </a>
+                    <h6>Release Date:
+                        <span class="not-bold-info" th:text="*{releaseDate}"></span>
+                    </h6>
+                </div>
             </div>
-
         </div>
 
         <hr>
